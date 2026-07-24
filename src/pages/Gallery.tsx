@@ -3,11 +3,7 @@ import { motion } from 'framer-motion';
 import PageWrapper from '../components/PageWrapper';
 import suyashImage from '../assets/suyash_ds.JPG';
 import Games_2 from '../assets/Games_2.jpg';
-import suyashImage from '../assets/suyash_ds.JPG';
-import suyashImage from '../assets/suyash_ds.JPG';
-import suyashImage from '../assets/suyash_ds.JPG';
-import suyashImage from '../assets/suyash_ds.JPG';
-import suyashImage from '../assets/suyash_ds.JPG';
+
 
 const Gallery = () => {
   const images = [
