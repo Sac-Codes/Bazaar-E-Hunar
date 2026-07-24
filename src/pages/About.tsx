@@ -5,10 +5,8 @@ import PageWrapper from '../components/PageWrapper';
 const About = () => {
   const timeline = [
     { time: '09:00 AM', title: 'Inauguration Ceremony', desc: 'Opening speech by the Principal and ribbon cutting.', color: 'from-[#00E5FF] to-[#3B82F6]', shadow: 'shadow-[#00E5FF]/20' },
-    { time: '10:00 AM', title: 'Stalls Open', desc: 'All stalls are officially open for visitors.', color: 'from-[#3B82F6] to-[#8B5CF6]', shadow: 'shadow-[#3B82F6]/20' },
-    { time: '01:00 PM', title: 'Cultural Performances', desc: 'Live music and dance performances at the main stage.', color: 'from-[#8B5CF6] to-[#FF4FCB]', shadow: 'shadow-[#8B5CF6]/20' },
-    { time: '04:00 PM', title: 'Award Ceremony', desc: 'Prizes for Best Stall, Highest Sales, and Most Innovative Idea.', color: 'from-[#FF4FCB] to-[#FF8A00]', shadow: 'shadow-[#FF4FCB]/20' },
-    { time: '05:00 PM', title: 'Closing', desc: 'Event wraps up.', color: 'from-[#FF8A00] to-[#10B981]', shadow: 'shadow-[#FF8A00]/20' },
+    { time: '9:30 AM', title: 'Stalls Open', desc: 'All stalls are officially open for visitors.', color: 'from-[#3B82F6] to-[#8B5CF6]', shadow: 'shadow-[#3B82F6]/20' },
+    { time: '02:00 PM', title: 'Closing', desc: 'Event wraps up.', color: 'from-[#FF8A00] to-[#10B981]', shadow: 'shadow-[#FF8A00]/20' },
   ];
 
   return (
