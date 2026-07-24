@@ -50,7 +50,7 @@ const Gallery = () => {
             <div className="absolute inset-0 bg-cyber-grid opacity-20 z-10 pointer-events-none mix-blend-overlay"></div>
             
             <img 
-              src = "../assets/suyash_ds.JPG"
+              src={suyashImage}
               alt="SkillVerse Aftermovie" 
               className="w-full h-full object-cover opacity-60 group-hover:opacity-30 group-hover:scale-105 transition-all duration-700"
               loading="lazy"
