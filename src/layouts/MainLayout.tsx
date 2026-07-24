@@ -143,7 +143,7 @@ const MainLayout = () => {
               </div>
               <div className="flex flex-col">
                 <span className="font-heading font-extrabold text-xl md:text-2xl leading-none tracking-tight text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#FF8A00] group-hover:to-[#FFD54A] transition-all">Bazaar-E-Hunar</span>
-                <span className="text-[10px] uppercase tracking-[0.3em] text-[#FFD54A] font-bold mt-1">2027</span>
+                <span className="text-[10px] uppercase tracking-[0.3em] text-[#FFD54A] font-bold mt-1">2026</span>
               </div>
             </Link>
 
@@ -288,7 +288,7 @@ const MainLayout = () => {
                 </div>
                 <div className="flex flex-col">
                   <span className="font-heading font-black text-2xl tracking-tight text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#FF8A00] group-hover:to-[#FFD54A] transition-all">बाज़ार-ए-हुनर</span>
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#FFD54A] font-bold mt-1">Bazaar-E-Hunar 2027</span>
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#FFD54A] font-bold mt-1">Bazaar-E-Hunar 2026</span>
                 </div>
               </Link>
               <p className="text-gray-400 text-base max-w-sm mb-8 leading-relaxed font-medium">
@@ -346,7 +346,7 @@ const MainLayout = () => {
           
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-gray-600 font-bold uppercase text-[10px] tracking-widest">
-              &copy; 2027 बाज़ार-ए-हुनर · Bazaar-E-Hunar. All rights reserved.
+              &copy; 2026 बाज़ार-ए-हुनर · Bazaar-E-Hunar. All rights reserved.
             </p>
             <div className="flex items-center gap-3 bg-white/[0.03] px-5 py-2.5 rounded-full border border-white/5">
               <span className="w-2 h-2 rounded-full bg-[#2DEB9B] animate-pulse"></span>
