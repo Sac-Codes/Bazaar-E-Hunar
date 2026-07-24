@@ -133,7 +133,7 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="font-hindi text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white leading-[1.1] tracking-wide drop-shadow-[0_0_30px_rgba(255,138,0,0.3)]"
             >
-              बाज़ार-ए-हुनर
+              हुनर बाज़ार
             </motion.h1>
 
             {/* English Subtitle — uppercase, gradient, smaller */}
