@@ -90,7 +90,7 @@ const Register = () => {
               <div className="flex justify-between items-center mb-6 px-4 relative z-10">
                 <h3 className="text-2xl font-black tracking-tight text-white uppercase tracking-widest">Initialization Form</h3>
                 <a href={googleFormUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-[#10B981] hover:text-white transition-colors flex items-center gap-2 group uppercase tracking-widest">
-                  [ Undock Frame ] <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  [ New Tab ] <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
               <div className="flex-1 w-full bg-white rounded-3xl overflow-hidden border-[4px] border-[#10B981] relative z-10 shadow-[0_0_20px_rgba(16,185,129,0.5)]">
