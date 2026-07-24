@@ -2,6 +2,12 @@ import { Play } from 'lucide-react';
 import { motion } from 'framer-motion';
 import PageWrapper from '../components/PageWrapper';
 import suyashImage from '../assets/suyash_ds.JPG';
+import Games_2 from '../assets/Games_2.jpg';
+import suyashImage from '../assets/suyash_ds.JPG';
+import suyashImage from '../assets/suyash_ds.JPG';
+import suyashImage from '../assets/suyash_ds.JPG';
+import suyashImage from '../assets/suyash_ds.JPG';
+import suyashImage from '../assets/suyash_ds.JPG';
 
 const Gallery = () => {
   const images = [
@@ -91,7 +97,7 @@ const Gallery = () => {
               >
                 <div className="absolute inset-0 bg-[#050816]/40 group-hover:bg-transparent transition-colors z-10 duration-500 mix-blend-multiply"></div>
                 <img 
-                  src={img.url} 
+                  src={Games_2} 
                   alt={img.alt} 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   loading="lazy"
