@@ -143,7 +143,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-mono font-black uppercase tracking-[0.15em] text-gradient-warm"
             >
-              Bazaar-E-Hunar 2026
+              Hunar Bazaar 2026
             </motion.p>
           </div>
 
@@ -201,7 +201,7 @@ const HighlightsSection = () => {
             By the <span className="text-gradient-primary">Numbers</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-medium">
-            The scale and impact of Bazaar-E-Hunar 2026
+            The scale and impact of Hunar Bazaar 2026
           </p>
         </motion.div>
 
