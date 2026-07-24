@@ -58,7 +58,7 @@ const Register = () => {
                 </li>
                 <li className="flex gap-4 group">
                   <span className="w-8 h-8 rounded-xl bg-[#050816] flex items-center justify-center font-bold text-[#10B981] shrink-0 border border-[#10B981]/30 group-hover:bg-[#10B981] group-hover:text-[#050816] transition-colors shadow-inner">3</span>
-                  <p className="text-gray-400 font-medium leading-relaxed">Clear any doubts or mention if there updates.</p>
+                  <p className="text-gray-400 font-medium leading-relaxed">Clear any doubts or mention if there would be any updates.</p>
                 </li>
                 <li className="flex gap-4 group">
                   <span className="w-8 h-8 rounded-xl bg-[#050816] flex items-center justify-center font-bold text-[#10B981] shrink-0 border border-[#10B981]/30 group-hover:bg-[#10B981] group-hover:text-[#050816] transition-colors shadow-inner">4</span>
