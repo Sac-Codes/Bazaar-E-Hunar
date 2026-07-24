@@ -7,11 +7,11 @@ import Games_2 from '../assets/Games_2.jpg';
 
 const Gallery = () => {
   const images = [
-    { id: 1, url: 'https://github.com/Sac-Codes/Bazaar-E-Hunar/blob/main/src/assets/Games_1.jpg', alt: 'Event Hall', size: 'large', glow: 'hover:shadow-[0_0_30px_rgba(0,229,255,0.4)]' },
-    { id: 2, url: 'https://github.com/Sac-Codes/Bazaar-E-Hunar/blob/main/src/assets/Home_1.jpg', alt: 'Food Stall', size: 'small', glow: 'hover:shadow-[0_0_30px_rgba(255,138,0,0.4)]' },
-    { id: 3, url: 'https://github.com/Sac-Codes/Bazaar-E-Hunar/blob/main/src/assets/Food_1.jpg', alt: 'Students interacting', size: 'small', glow: 'hover:shadow-[0_0_30px_rgba(139,92,246,0.4)]' },
-    { id: 4, url: 'https://github.com/Sac-Codes/Bazaar-E-Hunar/blob/main/src/assets/Food_3.jpg', alt: 'Presentation', size: 'medium', glow: 'hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]' },
-    { id: 5, url: 'https://github.com/Sac-Codes/Bazaar-E-Hunar/blob/main/src/assets/Games_2.jpg', alt: 'Crowd', size: 'medium', glow: 'hover:shadow-[0_0_30px_rgba(255,79,203,0.4)]' },
+    { id: 1, url: 'https://raw.githubusercontent.com/Sac-Codes/Bazaar-E-Hunar/refs/heads/main/src/assets/Games_1.jpg', alt: 'Event Hall', size: 'large', glow: 'hover:shadow-[0_0_30px_rgba(0,229,255,0.4)]' },
+    { id: 2, url: 'https://raw.githubusercontent.com/Sac-Codes/Bazaar-E-Hunar/refs/heads/main/src/assets/Home_1.jpg', alt: 'Food Stall', size: 'small', glow: 'hover:shadow-[0_0_30px_rgba(255,138,0,0.4)]' },
+    { id: 3, url: 'https://raw.githubusercontent.com/Sac-Codes/Bazaar-E-Hunar/refs/heads/main/src/assets/Food_1.jpg', alt: 'Students interacting', size: 'small', glow: 'hover:shadow-[0_0_30px_rgba(139,92,246,0.4)]' },
+    { id: 4, url: 'https://raw.githubusercontent.com/Sac-Codes/Bazaar-E-Hunar/refs/heads/main/src/assets/Food_3.jpg', alt: 'Presentation', size: 'medium', glow: 'hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]' },
+    { id: 5, url: 'https://raw.githubusercontent.com/Sac-Codes/Bazaar-E-Hunar/refs/heads/main/src/assets/Games_2.jpg', alt: 'Crowd', size: 'medium', glow: 'hover:shadow-[0_0_30px_rgba(255,79,203,0.4)]' },
   ];
 
   return (
@@ -52,7 +52,7 @@ const Gallery = () => {
             <div className="absolute inset-0 bg-cyber-grid opacity-20 z-10 pointer-events-none mix-blend-overlay"></div>
             
             <img 
-              src={suyashImage}
+              src='https://raw.githubusercontent.com/Sac-Codes/Bazaar-E-Hunar/refs/heads/main/src/assets/LOGO.jpg'
               alt="SkillVerse Aftermovie" 
               className="w-full h-full object-cover opacity-60 group-hover:opacity-30 group-hover:scale-105 transition-all duration-700"
               loading="lazy"
