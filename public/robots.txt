@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://bazaar-e-hunar.vercel.app/sitemap.xml
-
