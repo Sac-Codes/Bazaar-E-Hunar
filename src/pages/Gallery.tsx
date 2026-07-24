@@ -93,7 +93,7 @@ const Gallery = () => {
               >
                 <div className="absolute inset-0 bg-[#050816]/40 group-hover:bg-transparent transition-colors z-10 duration-500 mix-blend-multiply"></div>
                 <img 
-                  src={Games_2} 
+                  src={img.url} 
                   alt={img.alt} 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   loading="lazy"
