@@ -7,11 +7,11 @@ import Games_2 from '../assets/Games_2.jpg';
 
 const Gallery = () => {
   const images = [
-    { id: 1, url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80', alt: 'Event Hall', size: 'large', glow: 'hover:shadow-[0_0_30px_rgba(0,229,255,0.4)]' },
-    { id: 2, url: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Food Stall', size: 'small', glow: 'hover:shadow-[0_0_30px_rgba(255,138,0,0.4)]' },
-    { id: 3, url: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Students interacting', size: 'small', glow: 'hover:shadow-[0_0_30px_rgba(139,92,246,0.4)]' },
-    { id: 4, url: 'https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Presentation', size: 'medium', glow: 'hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]' },
-    { id: 5, url: 'https://images.unsplash.com/photo-1523580494112-071dcb851aa0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', alt: 'Crowd', size: 'medium', glow: 'hover:shadow-[0_0_30px_rgba(255,79,203,0.4)]' },
+    { id: 1, url: 'https://github.com/Sac-Codes/Bazaar-E-Hunar/blob/main/src/assets/Games_1.jpg', alt: 'Event Hall', size: 'large', glow: 'hover:shadow-[0_0_30px_rgba(0,229,255,0.4)]' },
+    { id: 2, url: 'https://github.com/Sac-Codes/Bazaar-E-Hunar/blob/main/src/assets/Home_1.jpg', alt: 'Food Stall', size: 'small', glow: 'hover:shadow-[0_0_30px_rgba(255,138,0,0.4)]' },
+    { id: 3, url: 'https://github.com/Sac-Codes/Bazaar-E-Hunar/blob/main/src/assets/Food_1.jpg', alt: 'Students interacting', size: 'small', glow: 'hover:shadow-[0_0_30px_rgba(139,92,246,0.4)]' },
+    { id: 4, url: 'https://github.com/Sac-Codes/Bazaar-E-Hunar/blob/main/src/assets/Food_3.jpg', alt: 'Presentation', size: 'medium', glow: 'hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]' },
+    { id: 5, url: 'https://github.com/Sac-Codes/Bazaar-E-Hunar/blob/main/src/assets/Games_2.jpg', alt: 'Crowd', size: 'medium', glow: 'hover:shadow-[0_0_30px_rgba(255,79,203,0.4)]' },
   ];
 
   return (
