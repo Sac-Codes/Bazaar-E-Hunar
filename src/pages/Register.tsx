@@ -45,7 +45,7 @@ const Register = () => {
               <div className="w-16 h-16 bg-[#050816] rounded-2xl flex items-center justify-center text-[#10B981] mb-8 border border-white/5 shadow-inner">
                 <ClipboardList size={32} />
               </div>
-              <h3 className="text-3xl font-black mb-6 text-white tracking-tight">Sequence Protocol</h3>
+              <h3 className="text-3xl font-black mb-6 text-white tracking-tight">Regsitration Procedure</h3>
               
               <ul className="space-y-6">
                 <li className="flex gap-4 group">
@@ -54,15 +54,15 @@ const Register = () => {
                 </li>
                 <li className="flex gap-4 group">
                   <span className="w-8 h-8 rounded-xl bg-[#050816] flex items-center justify-center font-bold text-[#10B981] shrink-0 border border-[#10B981]/30 group-hover:bg-[#10B981] group-hover:text-[#050816] transition-colors shadow-inner">2</span>
-                  <p className="text-gray-400 font-medium leading-relaxed">Await authorization packet from the Overlords within 48 hours.</p>
+                  <p className="text-gray-400 font-medium leading-relaxed">Await authorization message from the team within 48 hours.</p>
                 </li>
                 <li className="flex gap-4 group">
                   <span className="w-8 h-8 rounded-xl bg-[#050816] flex items-center justify-center font-bold text-[#10B981] shrink-0 border border-[#10B981]/30 group-hover:bg-[#10B981] group-hover:text-[#050816] transition-colors shadow-inner">3</span>
-                  <p className="text-gray-400 font-medium leading-relaxed">Transfer the initialization fee of ₹500 to the central vault.</p>
+                  <p className="text-gray-400 font-medium leading-relaxed">Clear any doubts or mention if there updates.</p>
                 </li>
                 <li className="flex gap-4 group">
                   <span className="w-8 h-8 rounded-xl bg-[#050816] flex items-center justify-center font-bold text-[#10B981] shrink-0 border border-[#10B981]/30 group-hover:bg-[#10B981] group-hover:text-[#050816] transition-colors shadow-inner">4</span>
-                  <p className="text-gray-400 font-medium leading-relaxed">Receive your Node ID and deployment instructions.</p>
+                  <p className="text-gray-400 font-medium leading-relaxed">Receive your team ID and further instructions.</p>
                 </li>
               </ul>
 
@@ -73,7 +73,7 @@ const Register = () => {
                   <span className="uppercase tracking-widest text-xs">System Warning</span>
                 </div>
                 <p className="text-gray-300 text-sm font-medium relative z-10 leading-relaxed">
-                  Requests submitted without a valid business logic outline will be automatically terminated by the firewall.
+                  Requests submitted without a valid business logic outline will be automatically terminated by the system.
                 </p>
               </div>
             </div>
