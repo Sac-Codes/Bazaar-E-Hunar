@@ -23,7 +23,7 @@ const About = () => {
             transition={{ duration: 0.8, type: 'spring' }}
             className="text-5xl md:text-7xl font-black mb-8 tracking-tight"
           >
-            About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A00] via-[#FF4FCB] to-[#8B5CF6] drop-shadow-[0_0_15px_rgba(255,138,0,0.4)]">Bazaar-E-Hunar</span>
+            About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A00] via-[#FF4FCB] to-[#8B5CF6] drop-shadow-[0_0_15px_rgba(255,138,0,0.4)]">Hunar Bazaar</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -96,7 +96,7 @@ const About = () => {
               transition={{ delay: 0.1 }}
               className="text-gray-400 text-xl font-medium max-w-2xl mx-auto"
             >
-              What students gain from participating in Bzaar-E-Hunar.
+              What students gain from participating in Hunar Bazaar.
             </motion.p>
           </div>
           
