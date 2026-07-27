@@ -7,6 +7,7 @@ import {
 import { motion, useScroll, useTransform } from 'framer-motion';
 import PageWrapper from '../components/PageWrapper';
 import PromotionalBanner from '../components/PromotionalBanner';
+import HeroVideo from '../components/HeroVideo';
 import SectionDivider from '../components/SectionDivider';
 import { trackRegisterClick, trackHeroCTA } from '../services/analytics';
 // import MeetTheTeam from '../components/MeetTheTeam'; // Hidden as per requirement
@@ -35,7 +36,7 @@ const HeroSection = () => {
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative h-full w-full flex items-center justify-center overflow-hidden">
       {/* Enhanced Hero Background — Aurora + Particles + Light Rays */}
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Orange-Cyan aurora mesh */}
@@ -361,7 +362,9 @@ const Home = () => {
   return (
     <PageWrapper>
       <PromotionalBanner />
-      <HeroSection />
+      <HeroVideo>
+        <HeroSection />
+      </HeroVideo>
       <SectionDivider variant="wave" />
       <HighlightsSection />
       <SectionDivider variant="blob" />

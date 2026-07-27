@@ -41,24 +41,22 @@ function sendToGA(...args: unknown[]) {
 
 /**
  * Initialize Google Analytics.
- * Creates the dataLayer and sets up the initial config.
  * Called once from the AnalyticsTracker component.
+ * 
+ * NOTE: gtag is already defined in index.html's inline script
+ * (which queues pushes to dataLayer until the real gtag.js loads).
+ * We only set up the initial config here; we do NOT redefine gtag
+ * so the real gtag from the CDN is preserved when it loads.
  */
 export function initGA(): void {
   if (initialized) return;
   initialized = true;
 
-  window.dataLayer = window.dataLayer || [];
-
-  // Define gtag function
-  window.gtag = function (...args: unknown[]) {
-    window.dataLayer.push(args);
-  };
-
-  // Initial configuration
-  window.gtag('js', new Date());
-  window.gtag('config', GA_MEASUREMENT_ID, {
-    send_page_view: false, // We handle page views manually
+  // gtag is already available via index.html's inline script.
+  // Send the initial page view config (with send_page_view: false
+  // since we track page views manually on route changes).
+  sendToGA('config', GA_MEASUREMENT_ID, {
+    send_page_view: false,
   });
 }
 

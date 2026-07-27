@@ -1,41 +1,22 @@
-# Hunar Bazaar 2026 - Stall Data Synchronization ✅ COMPLETED
+# Hero Video Integration — Implementation Steps
 
-## Phase 4: User Event Tracking ✅ COMPLETED
+## Step 1: Create `src/components/HeroVideo.tsx`
+- [x] Import video from `../assets/Sacs_Back_Vid.mp4`
+- [x] Build fullscreen video container with responsive heights
+- [x] Dark gradient overlay (black 70% → transparent → black 60%)
+- [x] Subtle orange/cyan glow overlays + aurora mesh
+- [x] Video element with autoplay, muted, loop, playsInline, preload="metadata"
+- [x] `object-fit: cover` for no black bars
+- [x] Accept children prop for hero content
+- [x] prefers-reduced-motion support
+- [x] Framer Motion fade-in for video
+- [x] GPU acceleration with will-change
 
-### Analytics Service Created
-- `src/services/analytics.ts` — Firebase Analytics service with event tracking functions
-- `src/components/AnalyticsTracker.tsx` — Page view tracking component
-- Integrated `AnalyticsTracker` into `src/App.tsx` for automatic page view tracking
+## Step 2: Edit `src/pages/Home.tsx`
+- [x] Import `HeroVideo`
+- [x] Wrap `<HeroSection />` inside `<HeroVideo>...</HeroVideo>`
 
-### Pages with Event Tracking
-
-| Page | Events Tracked |
-|------|---------------|
-| **Home** | `trackRegisterClick` (hero, cta_section), `trackHeroCTA` (explore_more, learn_more) |
-| **Stalls** | `trackStallSearch`, `trackCategoryFilter`, `trackStallView`, `trackRegisterClick` (stall_card) |
-| **Contact** | `trackContactSubmit` (success/failure), `trackHeroCTA` (contact_register) |
-| **Gallery** | `trackGalleryImageOpen`, `trackGalleryNavigation` (next/prev) |
-| **EventMap** | `trackMapZone` (food, games, art, craft, stage, help), `trackOpenGoogleMaps` |
-| **Register** | `trackExternalLink` (google_form) |
-| **MainLayout** | `trackRegisterClick` (header, mobile_menu, footer), `trackSocialClick` (website, whatsapp, share, email) |
-
-### Events Tracked
-- `page_view` — Automatic on every route change
-- `register_click` — Register button clicks (with source: hero, header, mobile_menu, footer, cta_section, stall_card)
-- `hero_cta` — Hero section CTA clicks
-- `stall_search` — Search queries
-- `category_filter` — Category filter changes
-- `stall_view` — Stall detail expansion
-- `contact_submit` — Contact form submission (success/failure)
-- `gallery_image_open` — Lightbox image opens
-- `gallery_navigation` — Lightbox navigation (prev/next)
-- `map_zone` — Zone clicks on event map
-- `open_google_maps` — Google Maps link clicks
-- `external_link` — External link clicks (Google Form)
-- `social_click` — Social media icon clicks
-
-### Build Verification
-- `npm run build` → ✅ 0 TypeScript errors, 0 Vite warnings
-- All imports are valid
-- Analytics is non-blocking (firebase optional, no crash on failure)
+## Step 3: Verification
+- [ ] `npm run build` passes
+- [ ] No TypeScript errors
 
