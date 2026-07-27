@@ -133,20 +133,22 @@ const Stalls = () => {
               const iconData = getCategoryIcon(stall.category);
               const showEmojiFallback = iconFallbackMap.current[stall.id];
               return (
-                <motion.div 
+              <motion.div 
                   key={stall.id} 
                   variants={item}
-                  className="relative group flex flex-col bg-[#1A233A]/60 backdrop-blur-sm rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2"
+                  className={`relative group flex flex-col bg-[#1A233A]/60 backdrop-blur-sm rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 ${stall.id === 'S-050' ? 'principal-stall' : ''}`}
                   style={{
-                    border: '1px solid rgba(255,255,255,0.06)',
-                    boxShadow: '0 4px 30px rgba(0,0,0,0.3)',
+                    border: stall.id === 'S-050' ? '2px solid rgba(220,38,38,0.6)' : '1px solid rgba(255,255,255,0.06)',
+                    boxShadow: stall.id === 'S-050' ? '0 4px 30px rgba(220,38,38,0.3), 0 0 60px rgba(220,38,38,0.15)' : '0 4px 30px rgba(0,0,0,0.3)',
                   }}
                 >
                   {/* Gradient border on hover */}
                   <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{
                       border: '1.5px solid transparent',
-                      background: 'linear-gradient(135deg, rgba(0,229,255,0.3), rgba(255,138,0,0.3), rgba(139,92,246,0.3)) border-box',
+                      background: stall.id === 'S-050'
+                        ? 'linear-gradient(135deg, rgba(220,38,38,0.5), rgba(239,68,68,0.3)) border-box'
+                        : 'linear-gradient(135deg, rgba(0,229,255,0.3), rgba(255,138,0,0.3), rgba(139,92,246,0.3)) border-box',
                       WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
                       WebkitMaskComposite: 'xor',
                       maskComposite: 'exclude',
@@ -156,6 +158,14 @@ const Stalls = () => {
                   {/* Glow effects */}
                   <div className="absolute -top-24 -right-24 w-48 h-48 bg-gradient-to-br from-[#FF8A00]/10 to-[#FFD54A]/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                   <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-gradient-to-br from-[#00E5FF]/10 to-[#8B5CF6]/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                  
+                  {/* Principal's Stall premium red glow */}
+                  {stall.id === 'S-050' && (
+                    <>
+                      <div className="absolute -top-20 -left-20 w-60 h-60 bg-[#DC2626]/15 rounded-full blur-3xl animate-pulse pointer-events-none" />
+                      <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-[#EF4444]/10 rounded-full blur-3xl animate-pulse pointer-events-none" />
+                    </>
+                  )}
 
                   {/* Card Content */}
                   <div className="p-8 flex flex-col flex-1 relative z-10">
@@ -163,9 +173,9 @@ const Stalls = () => {
                     <div className="flex items-center justify-between mb-6">
                       {/* Category Icon */}
                       <div
-                        className={`w-14 h-14 rounded-full bg-gradient-to-br ${iconData.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:shadow-xl transition-all duration-500`}
+                        className={`w-14 h-14 rounded-full bg-gradient-to-br ${stall.id === 'S-050' ? 'from-[#DC2626] to-[#EF4444]' : iconData.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:shadow-xl transition-all duration-500`}
                         style={{ 
-                          boxShadow: `0 0 20px ${iconData.glowColor}`,
+                          boxShadow: stall.id === 'S-050' ? '0 0 20px rgba(220,38,38,0.4)' : `0 0 20px ${iconData.glowColor}`,
                           transform: 'translateZ(0)',
                         }}
                       >
@@ -183,13 +193,21 @@ const Stalls = () => {
                       </div>
 
                       {/* Category Badge */}
-                      <div className="bg-[#050816]/80 border border-white/10 text-gray-300 text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full group-hover:border-[#FF8A00]/40 group-hover:text-[#FFD54A] transition-all duration-300 backdrop-blur-md">
-                        {stall.category}
+                      <div className={`text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full backdrop-blur-md transition-all duration-300 ${
+                        stall.id === 'S-050'
+                          ? 'bg-[#DC2626]/20 border border-[#DC2626]/50 text-[#EF4444] shadow-[0_0_12px_rgba(220,38,38,0.3)]'
+                          : 'bg-[#050816]/80 border border-white/10 text-gray-300 group-hover:border-[#FF8A00]/40 group-hover:text-[#FFD54A]'
+                      }`}>
+                        {stall.id === 'S-050' ? '👑 Principal\'s Stall' : stall.category}
                       </div>
                     </div>
 
-                    {/* Stall Name */}
-                    <h3 className="text-2xl font-black text-white mb-2 tracking-tight group-hover:text-[#FFD54A] transition-colors duration-300">
+                      {/* Stall Name */}
+                    <h3 className={`text-2xl font-black mb-2 tracking-tight transition-colors duration-300 ${
+                      stall.id === 'S-050'
+                        ? 'text-[#EF4444] drop-shadow-[0_0_8px_rgba(239,68,68,0.3)]'
+                        : 'text-white group-hover:text-[#FFD54A]'
+                    }`}>
                       {stall.name}
                     </h3>
 
@@ -229,7 +247,11 @@ const Stalls = () => {
                           setExpandedStall(nextState);
                           if (nextState) trackStallView(stall.name);
                         }}
-                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#FF8A00] to-[#FFD54A] text-[#07111F] font-bold text-xs hover:shadow-lg hover:shadow-[#FF8A00]/30 transition-all duration-300"
+                        className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs hover:shadow-lg transition-all duration-300 ${
+                          stall.id === 'S-050'
+                            ? 'bg-gradient-to-r from-[#DC2626] to-[#EF4444] text-white hover:shadow-[#DC2626]/30'
+                            : 'bg-gradient-to-r from-[#FF8A00] to-[#FFD54A] text-[#07111F] hover:shadow-[#FF8A00]/30'
+                        }`}
                       >
                         {expandedStall === stall.id ? 'Show Less' : 'View Details'}
                         {expandedStall === stall.id ? <ChevronUp size={14} /> : <ChevronDown size={14} />}

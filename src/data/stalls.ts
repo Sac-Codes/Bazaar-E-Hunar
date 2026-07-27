@@ -14,9 +14,10 @@ export interface Stall {
 }
 
 // ═══════════════════════════════════════════════════
-// AUTO-GENERATED from Hunar Bazaar 2026 (Responses) (1).xlsx
+// AUTO-GENERATED from Hunar Bazaar 2026 (Responses) (1).xlsx & (2).xlsx
 // Generated on: 2026-07-26T13:55:44.044Z
-// Total stalls: 40
+// Updated: 2026 with latest registration data
+// Total stalls: 100
 // Categories: Arts & Crafts, Bakery & Desserts, Books & Stationery, Food & Beverages, Games & Activities, Handmade Accessories, Others
 // ═══════════════════════════════════════════════════
 
@@ -579,6 +580,150 @@ export const stallsData: Stall[] = [
     requirements: "2 tables 4chairs",
     team: "Aaradhaya 11 B2 Anvita 11 B2 Diksha 11 B2 Stuti 11B2",
     phone: "6307720637",
+    location: "Exhibition Zone"
+  },
+  // ═══════════════════════════════════════════════════
+  // NEW STALLS imported from Hunar Bazaar 2026 (Responses) (2).xlsx
+  // Validated: genuine non-duplicate entries only
+  // ═══════════════════════════════════════════════════
+  {
+    id: "S-041",
+    name: "2 good 2 go",
+    category: "Food & Beverages",
+    owner: "Anandi Dubey",
+    classStr: "11 A2",
+    description: "Here we will provide snacks and cold coffee, Snacks include Jhalmuri, Momos and sandwich with hygienic way with a way that everyone will forget about street stall and try to make it on the home in a better form",
+    priceRange: "Momo ₹10 for 2 pieces, Sandwich ₹40, Cold Coffee ₹40, Jhalmuri ₹15",
+    investment: "₹1600",
+    requirements: "Electricity for steamer and sandwich maker, 2-3 tables",
+    team: "Anandi Dubey - 11 A2; Arya Singh - 11 A2; Shreya Gupta - 11 A2; Anveshsa Singh 11 A2",
+    phone: "6307205670",
+    location: "Food Zone"
+  },
+  {
+    id: "S-042",
+    name: "Lucky 16",
+    category: "Games & Activities",
+    owner: "Naitik Singh",
+    classStr: "9th O",
+    description: "Lucky 16 is an exciting lucky-draw game stall where participants pay ₹10 for one chance and select a card from a deck of 16 cards. Players can win small prizes, big prizes, special six-chance vouchers, or collect five different coloured coupons to win the Ultra Grand Prize. The deck is shuffled every time after one card pick. Even players who get a 'Try Again' card receive a ₹1 toffee, ensuring that no one leaves completely empty-handed.",
+    priceRange: "₹10 per chance (1 card pick)",
+    investment: "₹700 + table/chair cost",
+    requirements: "1 table + 2 chairs",
+    team: "Naitik Singh (9th O), Raunit Singh (9th O)",
+    phone: "9140805605",
+    location: "Games Zone"
+  },
+  {
+    id: "S-043",
+    name: "Swad-e-banaras",
+    category: "Food & Beverages",
+    owner: "Grasy Shahi",
+    classStr: "12th A2",
+    description: "Swad-e-Banaras brings the perfect balance of savory and sweet to fuel your school day. Treat yourself to crispy, flavorful chips and delicious rolls, then satisfy your sweet tooth with innovative, mouth-watering chocolate dessert golgappe and rich chocolate desserts.",
+    priceRange: "Under ₹100",
+    investment: "₹500",
+    requirements: "2 tables, 3 chairs",
+    team: "Grasy Shahi 12th A2, Komal Pandey, Ananya Gaur",
+    phone: "8707673810",
+    location: "Food Zone"
+  },
+  {
+    id: "S-044",
+    name: "Flavour fusion",
+    category: "Food & Beverages",
+    owner: "Aparna mishra",
+    classStr: "9 M",
+    description: "Coffee cocktail and shakes stall offering refreshing beverages.",
+    priceRange: "₹250",
+    investment: "₹100",
+    requirements: "1 kettle, 2 tables, 2 chairs",
+    team: "Aparna mishra 9m, Jhalak singh 8m",
+    phone: "7310150372",
+    location: "Food Zone"
+  },
+  {
+    id: "S-045",
+    name: "Fun Fusion",
+    category: "Games & Activities",
+    owner: "Kavya yadav",
+    classStr: "9th G",
+    description: "An interactive games stall with fun challenges and exciting prizes for participants of all age groups.",
+    priceRange: "₹20 – ₹100",
+    investment: "₹500 – ₹1500",
+    requirements: "1 table, 4 chairs and electricity",
+    team: "Kavya Yadav 9th G, Riya Singh, Vaishnavi Singh, Anshika Patel",
+    phone: "8303197887",
+    location: "Games Zone"
+  },
+  {
+    id: "S-046",
+    name: "Fortune Frenzy",
+    category: "Games & Activities",
+    owner: "Ayush Agrawal",
+    classStr: "12th C2",
+    description: "An interactive and entertaining game zone where participants can test their luck through exciting games such as 7 Up–7 Down (dice prediction game), Car Race (dice-based racing game), and other quick chance-based activities. Designed to provide a fun-filled experience and encourage participation.",
+    priceRange: "₹30",
+    investment: "₹1500",
+    requirements: "More than 1 table",
+    team: "Ayush Agrawal 12th C2, Vedant Agrawal 12th C2, Arpita Pandey 12th A1, Aditi Singh 12th A1",
+    phone: "9569197565",
+    location: "Games Zone"
+  },
+  {
+    id: "S-047",
+    name: "Moodboard",
+    category: "Others",
+    owner: "Vaani Srivastava",
+    classStr: "11 B2",
+    description: "Original, self-designed keychains, bookmarks and wall posters inspired by both traditional and modern aesthetics, trending quotes, celebrities and creative typography. Each product is designed to add a unique touch to everyday life.",
+    priceRange: "Bookmark: ₹15; Keychain: ₹10; Wall Poster: ₹30",
+    investment: "₹700",
+    requirements: "1 Table, 2 Chairs, 1 electrical socket for decorative lights",
+    team: "Vaani Srivastava 11th B2, Yusra Fatima 11th B2, Aradhya Rai 11th A2, Divija Tripathi 11th A2, Chahat Singh 11th B2",
+    phone: "8604390878",
+    location: "Exhibition Zone"
+  },
+  {
+    id: "S-048",
+    name: "Game zone",
+    category: "Games & Activities",
+    owner: "Tanishka Srivastava",
+    classStr: "9 J",
+    description: "Two fascinating games: first game is Spin for Luck and the second one is Assemble the Letters. Fun challenges for everyone!",
+    priceRange: "₹15-20 rupees",
+    investment: "Approx: ₹500-1000",
+    requirements: "Table, stopwatch",
+    team: "Prakriti Pandey – 9 J, Tanishka Srivastava – 9 J",
+    phone: "9511024925",
+    location: "Games Zone"
+  },
+  {
+    id: "S-049",
+    name: "Wok & whirl",
+    category: "Food & Beverages",
+    owner: "Trisha Tiwari",
+    classStr: "12 A1",
+    description: "Welcome to Wok & Whirl, where the vibrant energy of street food meets contemporary culinary elegance. From the fiery toss of signature Indo-Chinese fusion to the delicate crunch of artisanal street bites, every dish is crafted to elevate your palate.",
+    priceRange: "Chilli potato ₹20, Panipuri ₹10, Chowmein ₹20, Cutlet ₹20, Fried idli ₹20",
+    investment: "₹900-₹1000",
+    requirements: "2 tables and 3 chairs",
+    team: "Trisha Tiwari 12 A1 (Team of 5)",
+    phone: "8957882425",
+    location: "Food Zone"
+  },
+  {
+    id: "S-050",
+    name: "Team Hunar Bazaar",
+    category: "Others",
+    owner: "Neelam Singh (Principal)",
+    classStr: "Principal",
+    description: "Concept creator and guiding force behind Hunar Bazaar 2026. This stall represents the vision and leadership of our respected Principal Ma'am, who inspires creativity, innovation, and entrepreneurial spirit among students.",
+    priceRange: "Not for sale",
+    investment: "Not applicable",
+    requirements: "Not applicable",
+    team: "Sneha Singh, Krishna Srivastava",
+    phone: "9452566818",
     location: "Exhibition Zone"
   }
 ];

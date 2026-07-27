@@ -34,8 +34,8 @@ const PromotionalBanner = ({
         {/* Cyber grid overlay */}
         <div className="absolute inset-0 bg-cyber-grid opacity-20 mix-blend-overlay" />
 
-        {/* Aurora color wash */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#00E5FF]/10 via-transparent to-[#8B5CF6]/10" />
+        {/* Aurora color wash — festival palette */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FF8A00]/15 via-transparent to-[#8B5CF6]/12" />
 
         {/* Bottom fade for smooth transition */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050816] to-transparent" />
@@ -63,7 +63,7 @@ const PromotionalBanner = ({
             </h2>
             
             <p className="text-base md:text-lg text-gray-300 mt-3 max-w-2xl font-medium">
-              Where innovation meets celebration — 50+ stalls, live performances, tech showcases, and endless creativity.
+              Where innovation meets celebration — 100+ stalls, live performances, tech showcases, and endless creativity.
             </p>
           </div>
         </motion.div>

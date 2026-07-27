@@ -4,7 +4,7 @@ import { stallsData } from '../data/stalls';
 import { getCategoryIcon } from '../data/stallIcons';
 
 // ── Configurable ──
-const MAX_STALLS = 50;
+const MAX_STALLS = 100;
 
 // ── Types ──
 interface CategoryStat {

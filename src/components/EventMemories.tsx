@@ -27,7 +27,7 @@ export const EventMemories = () => {
   };
 
   return (
-    <section className="py-20 md:py-32 bg-white relative overflow-hidden">
+    <section className="py-20 md:py-32 bg-section-orange-cyan relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
         {/* Section Header */}
         <motion.div
@@ -37,10 +37,10 @@ export const EventMemories = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
             Moments From Previous Editions
           </h2>
-          <p className="text-lg text-gray-600 font-light max-w-2xl mx-auto">
+          <p className="text-lg text-gray-400 font-medium max-w-2xl mx-auto">
             Relive the excitement and energy from Hunar Bazaar events past
           </p>
         </motion.div>
@@ -57,11 +57,11 @@ export const EventMemories = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 whileHover={{ y: -8 }}
-                className="group relative h-64 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
+                className="group relative h-64 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-[#FF8A00]/10 transition-all duration-500 border border-white/5"
               >
                 {/* Shimmer placeholder */}
                 {!isLoaded && (
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-300 to-gray-200 animate-pulse" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#1A233A] via-[#111827] to-[#1A233A] animate-pulse" />
                 )}
 
                 {/* Actual event image */}
@@ -76,7 +76,7 @@ export const EventMemories = () => {
                 />
 
                 {/* Dark overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050816]/70 via-transparent to-[#050816]/20 opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
 
                 {/* Caption */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -84,7 +84,7 @@ export const EventMemories = () => {
                 </div>
 
                 {/* Hover border */}
-                <div className="absolute inset-0 border-2 border-white/0 group-hover:border-white/30 rounded-2xl transition-all duration-500"></div>
+                <div className="absolute inset-0 border-2 border-white/0 group-hover:border-[#FF8A00]/40 rounded-2xl transition-all duration-500"></div>
               </motion.div>
             );
           })}

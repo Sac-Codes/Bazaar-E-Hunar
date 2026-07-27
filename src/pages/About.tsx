@@ -25,6 +25,7 @@ const About = () => {
             transition={{ duration: 0.8, type: 'spring' }}
             className="text-5xl md:text-7xl font-black mb-8 tracking-tight"
           >
+            <span className="font-hindi text-5xl md:text-7xl font-black mb-4 block">बाज़ार-ए-हुनर</span>
             About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8A00] via-[#FF4FCB] to-[#8B5CF6] drop-shadow-[0_0_15px_rgba(255,138,0,0.4)]">Hunar Bazaar</span>
           </motion.h1>
           <motion.p 

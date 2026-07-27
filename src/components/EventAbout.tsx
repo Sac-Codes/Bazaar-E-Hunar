@@ -4,13 +4,7 @@ import entryImage from '../assets/Wecome_Hunar_bazaar.jpg';
 
 export const EventAbout = () => {
   return (
-    <section className="py-20 md:py-32 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
-      </div>
-
+    <section className="py-20 md:py-32 bg-section-purple-cyan relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left side - Event image */}
@@ -22,26 +16,26 @@ export const EventAbout = () => {
             className="relative group"
           >
             {/* Image */}
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl h-96 md:h-full min-h-[400px]">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl h-96 md:h-full min-h-[400px] border border-white/5">
               <img
                 src={entryImage}
                 alt="Hunar Bazaar 2026 — Welcome"
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-purple-400/20 to-pink-400/20"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-[#FF8A00]/20 via-[#8A5CFF]/20 to-[#FF4D9D]/20"></div>
 
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent group-hover:from-black/20 transition-all duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050816]/50 to-transparent group-hover:from-[#050816]/40 transition-all duration-500"></div>
 
               {/* Badge */}
-              <div className="absolute top-6 right-6 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white font-semibold text-sm">
+              <div className="absolute top-6 right-6 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold text-sm">
                 Since 2024
               </div>
             </div>
 
             {/* Glow effect */}
-            <div className="absolute -inset-2 bg-gradient-to-r from-primary via-secondary to-accent rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500 -z-10"></div>
+            <div className="absolute -inset-2 bg-gradient-to-r from-[#FF8A00] via-[#8A5CFF] to-[#FF4D9D] rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500 -z-10"></div>
           </motion.div>
 
           {/* Right side - Content */}
@@ -57,7 +51,7 @@ export const EventAbout = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-semibold text-sm mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/20 text-[#FF8A00] font-semibold text-sm mb-6"
             >
               <Sparkles size={16} />
               About Hunar Bazaar
@@ -69,9 +63,9 @@ export const EventAbout = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-6 leading-tight"
+              className="text-4xl md:text-5xl font-heading font-bold text-white mb-6 leading-tight"
             >
-              Where Creativity Meets <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Entrepreneurship</span>
+              Where Creativity Meets <span className="text-gradient-warm">Entrepreneurship</span>
             </motion.h2>
 
             {/* Description */}
@@ -80,7 +74,7 @@ export const EventAbout = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-600 font-light mb-8 leading-relaxed"
+              className="text-xl text-gray-400 font-medium mb-8 leading-relaxed"
             >
               Hunar Bazaar is the annual student entrepreneurship festival where creativity, innovation, leadership, and business come together to transform ideas into reality. Our mission is to empower students to showcase their talents, learn real-world business skills, and build lasting connections with peers and mentors.
             </motion.p>
@@ -100,10 +94,10 @@ export const EventAbout = () => {
                 'Network with fellow innovators'
               ].map((point, idx) => (
                 <div key={idx} className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0 mt-1">
-                    <ArrowRight size={14} className="text-white" />
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#FF8A00] to-[#FFD54A] flex items-center justify-center flex-shrink-0 mt-1">
+                    <ArrowRight size={14} className="text-[#07111F]" />
                   </div>
-                  <p className="text-gray-700 font-medium">{point}</p>
+                  <p className="text-gray-300 font-medium">{point}</p>
                 </div>
               ))}
             </motion.div>
@@ -115,7 +109,7 @@ export const EventAbout = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <button className="btn-primary text-lg px-8 py-4 group">
+              <button className="btn-premium text-lg px-8 py-4 group">
                 Learn More
                 <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
               </button>

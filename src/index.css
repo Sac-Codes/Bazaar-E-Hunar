@@ -1,13 +1,13 @@
 /* ───────────────────────────────────────────────
-   BAZAAR-E-HUNAR 2026 — Cyber Festival Design System
-   Palette: 70% Deep Navy | 20% Orange+Gold | 10% Cyan+Purple
+   BAZAAR-E-HUNAR 2026 — Premium Festival Design System
+   Palette: 70% Deep Navy | 20% Orange+Gold | 10% Cyan+Purple+Red
    ─────────────────────────────────────────────── */
 
 @import "tailwindcss";
 
 @theme {
-  /* ── Core Palette: Cyber Festival ── */
-  --color-primary: #FF8A00;          /* Festival Orange — new primary */
+  /* ── Core Palette: Premium Festival ── */
+  --color-primary: #FF8A00;          /* Festival Orange */
   --color-primary-dark: #E07B00;
   --color-primary-light: #FFB347;
   --color-secondary: #FFD54A;        /* Warm Gold */
@@ -15,8 +15,9 @@
   --color-accent: #8A5CFF;           /* Soft Violet */
   --color-festival: #FF4D9D;         /* Magenta */
   --color-success: #2DEB9B;          /* Emerald */
-  --color-highlight: #00E5FF;        /* Electric Cyan (supporting) */
+  --color-highlight: #00E5FF;        /* Electric Cyan */
   --color-magenta: #FF4D9D;
+  --color-crimson: #DC2626;          /* Deep Red (Principal's accent) */
 
   /* ── Backgrounds: Deep Navy Family ── */
   --color-background: #07111F;            /* Deepest navy */
@@ -160,6 +161,40 @@
     50% { transform: perspective(1200px) rotateX(3deg) rotateY(3deg); }
     100% { transform: perspective(1200px) rotateX(0deg) rotateY(0deg); }
   }
+
+  /* ── Premium Pulse Glow ── */
+  @keyframes pulseGlow {
+    0% { box-shadow: 0 0 5px rgba(255, 138, 0, 0.2), 0 0 10px rgba(255, 138, 0, 0.1); }
+    50% { box-shadow: 0 0 20px rgba(255, 138, 0, 0.4), 0 0 40px rgba(255, 138, 0, 0.2); }
+    100% { box-shadow: 0 0 5px rgba(255, 138, 0, 0.2), 0 0 10px rgba(255, 138, 0, 0.1); }
+  }
+  --animate-pulse-glow: pulseGlow 3s ease-in-out infinite;
+
+  /* ── Smooth Scale Breathe ── */
+  @keyframes breatheScale {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+  }
+  --animate-breathe: breatheScale 4s ease-in-out infinite;
+
+  /* ── Gradient Shift for borders ── */
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  --animate-gradient-shift: gradientShift 4s ease infinite;
+
+  /* ── Slow Drift for background elements ── */
+  @keyframes slowDrift {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(10px, -15px) rotate(2deg); }
+    50% { transform: translate(-5px, 10px) rotate(-1deg); }
+    75% { transform: translate(15px, 5px) rotate(1deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+  }
+  --animate-slow-drift: slowDrift 15s ease-in-out infinite;
 }
 
 @layer base {

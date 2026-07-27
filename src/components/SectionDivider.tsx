@@ -42,8 +42,9 @@ const SectionDivider = ({ variant = 'wave', className = '' }: SectionDividerProp
       case 'glow':
         return (
           <div className="w-full h-full flex items-center justify-center">
-            <div className="w-32 h-[2px] bg-gradient-to-r from-transparent via-[#FF8A00]/60 to-transparent rounded-full" />
-            <div className="absolute w-16 h-4 bg-[#FF8A00]/20 blur-xl rounded-full" />
+            <div className="w-48 h-[2px] bg-gradient-to-r from-transparent via-[#FF8A00] via-[#FFD54A] to-transparent rounded-full" />
+            <div className="absolute w-24 h-6 bg-[#FF8A00]/20 blur-xl rounded-full" />
+            <div className="absolute w-12 h-12 bg-[#FFD54A]/10 blur-2xl rounded-full animate-pulse-slow" />
           </div>
         );
       default:

@@ -109,6 +109,7 @@ const FloatingOrbs = ({ className = '' }: FloatingOrbsProps) => {
             x: orb.animX,
             y: orb.animY,
             rotate: [0, 5, -5, 3, 0],
+            scale: [1, 1.05, 0.95, 1.03, 1],
           }}
           transition={{
             duration: orb.duration,

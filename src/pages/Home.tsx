@@ -22,7 +22,7 @@ const CATEGORIES = [
 ];
 
 const HIGHLIGHTS = [
-  { value: '50+', label: 'Innovative Stalls', icon: Target, color: '#FF8A00', desc: 'Showcasing the best ideas' },
+  { value: '100+', label: 'Innovative Stalls', icon: Target, color: '#FF8A00', desc: 'Showcasing the best ideas' },
   { value: '200+', label: 'Visitors Expected', icon: Users, color: '#00E5FF', desc: 'A massive vibrant crowd' },
   { value: 'Awards', label: 'Prizes & Recognition', icon: Trophy, color: '#FFD54A', desc: 'Celebrating excellence' },
   { value: '20+', label: 'Workshops', icon: Lightbulb, color: '#8A5CFF', desc: 'Learn from industry experts' },
@@ -200,7 +200,7 @@ const HighlightsSection = () => {
             Event Statistics
           </motion.div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
-            By the <span className="text-gradient-primary">Numbers</span>
+            By the <span className="text-gradient-festival">Numbers</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-medium">
             The scale and impact of Hunar Bazaar 2026

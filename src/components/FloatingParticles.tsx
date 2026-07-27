@@ -14,12 +14,12 @@ interface Particle {
 }
 
 const COLORS = [
-  'rgba(255, 138, 0, 0.5)',   // Festival Orange
-  'rgba(255, 213, 74, 0.4)',  // Warm Gold
+  'rgba(255, 138, 0, 0.6)',   // Festival Orange
+  'rgba(255, 213, 74, 0.5)',  // Warm Gold
   'rgba(138, 92, 255, 0.5)',  // Soft Violet
-  'rgba(255, 77, 157, 0.4)',  // Magenta
-  'rgba(0, 229, 255, 0.4)',   // Electric Cyan
-  'rgba(45, 235, 155, 0.3)',  // Emerald
+  'rgba(255, 77, 157, 0.5)',  // Magenta
+  'rgba(0, 229, 255, 0.5)',   // Electric Cyan
+  'rgba(45, 235, 155, 0.4)',  // Emerald
 ];
 
 const FloatingParticles = () => {
