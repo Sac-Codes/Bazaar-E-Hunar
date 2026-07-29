@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import skillBazaarLogo from '../assets/Skill_bazaar_logo.png';
+import hunarBazaarLogo from '../assets/hunar-bazaar-logo.png';
 
 const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
@@ -47,30 +47,23 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-10 flex flex-col items-center"
         >
-          {/* Logo with Premium Animation */}
+          {/* Logo with Premium Animation — Simplified to remove glitch artifact */}
           <div className="relative w-28 h-28 mb-8">
+            {/* Single gradient background instead of overlapping rotating pseudo-elements */}
             <motion.div 
-              className="absolute inset-0 bg-gradient-to-br from-[#FF8A00]/30 to-[#FFD54A]/20 rounded-2xl rotate-6"
-              animate={{ rotate: [6, 12, 6] }}
+              className="absolute inset-0 bg-gradient-to-br from-[#FF8A00]/20 to-[#FFD54A]/10 rounded-2xl"
+              animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             />
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-br from-[#00E5FF]/20 to-[#8A5CFF]/20 rounded-2xl -rotate-3"
-              animate={{ rotate: [-3, -8, -3] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            <div className="absolute inset-0 rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10">
+            <div className="absolute inset-0 rounded-2xl shadow-2xl overflow-hidden">
               <img 
-                src={skillBazaarLogo} 
-                alt="SkillVerse logo" 
-                className="w-full h-full object-cover scale-110" 
+                src={hunarBazaarLogo} 
+                alt="Hunar Bazaar logo" 
+                className="w-full h-full object-contain" 
               />
             </div>
-            {/* Shimmer effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2s_infinite] rounded-2xl" />
-            
-            {/* Premium glow ring */}
-            <div className="absolute -inset-3 rounded-[2rem] border border-[#FF8A00]/20 animate-pulse-glow" />
+            {/* Subtle glow ring */}
+            <div className="absolute -inset-2 rounded-[1.5rem] border border-[#FF8A00]/15" />
           </div>
 
           {/* Bilingual Brand Name */}

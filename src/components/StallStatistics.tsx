@@ -271,7 +271,7 @@ const StallStatistics = () => {
                 <img
                   src={stats.mostPopular.icon}
                   alt={stats.mostPopular.name}
-                  className="w-5 h-5 object-contain select-none pointer-events-none"
+                  className="w-8 h-8 object-contain select-none pointer-events-none"
                   loading="lazy"
                 />
               </div>
@@ -354,7 +354,7 @@ const StallStatistics = () => {
                   <img
                     src={cat.icon}
                     alt={cat.name}
-                    className="w-5 h-5 object-contain select-none pointer-events-none"
+                    className="w-8 h-8 object-contain select-none pointer-events-none"
                     loading="lazy"
                   />
                 </div>

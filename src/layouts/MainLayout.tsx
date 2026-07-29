@@ -6,6 +6,7 @@ import FloatingParticles from '../components/FloatingParticles';
 import AuroraBackground from '../components/AuroraBackground';
 import FloatingOrbs from '../components/FloatingOrbs';
 import { trackSocialClick, trackRegisterClick } from '../services/analytics';
+import hunarBazaarLogo from '../assets/hunar-bazaar-logo.png';
 
 // --- CUSTOM CURSOR ---
 const CustomCursor = () => {
@@ -140,7 +141,7 @@ const MainLayout = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 group" onClick={closeMenu}>
               <div className="relative w-12 h-12 rounded-xl overflow-hidden shadow-lg shadow-[#FF8A00]/20 transition-all duration-300 group-hover:scale-105 group-hover:shadow-[#FF8A00]/40 bg-[#111827] flex items-center justify-center border border-[#FF8A00]/30">
-                <Sparkles size={24} className="text-[#FFD54A] group-hover:text-white transition-colors" />
+                <img src={hunarBazaarLogo} alt="Hunar Bazaar" className="w-10 h-10 object-contain" />
               </div>
               <div className="flex flex-col">
                 <span className="font-heading font-extrabold text-xl md:text-2xl leading-none tracking-tight text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#FF8A00] group-hover:to-[#FFD54A] transition-all">Hunar Bazaar</span>
@@ -291,8 +292,8 @@ const MainLayout = () => {
             {/* Brand Section */}
             <div className="lg:col-span-5">
               <Link to="/" className="flex items-center gap-3 mb-6 group">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF8A00]/20 to-[#FFD54A]/10 flex items-center justify-center border border-[#FF8A00]/30 shadow-lg shadow-[#FF8A00]/20">
-                  <Sparkles size={24} className="text-[#FFD54A]" />
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF8A00]/20 to-[#FFD54A]/10 flex items-center justify-center border border-[#FF8A00]/30 shadow-lg shadow-[#FF8A00]/20 overflow-hidden">
+                  <img src={hunarBazaarLogo} alt="Hunar Bazaar" className="w-11 h-11 object-contain" />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-heading font-black text-2xl tracking-tight text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#FF8A00] group-hover:to-[#FFD54A] transition-all">हुनर बाजार</span>

@@ -89,7 +89,7 @@ const Contact = () => {
         </>
       ),
     },
-    {
+{
       icon: Phone,
       iconColor: 'text-[#8B5CF6]',
       groupHoverBg: 'group-hover:bg-[#8B5CF6]',
@@ -105,6 +105,52 @@ const Contact = () => {
             href="tel:+919648393187"
             aria-label="Call Sneha Ma'am at +91 96483 93187"
             className="inline-flex items-center gap-2 text-[#8B5CF6] hover:text-white transition-colors font-medium text-sm bg-[#8B5CF6]/10 hover:bg-[#8B5CF6]/20 px-4 py-2 rounded-xl border border-[#8B5CF6]/20 hover:border-[#8B5CF6]/40"
+          >
+            <Phone size={14} />
+            -
+          </a>
+        </>
+      ),
+    },
+    {
+      icon: User,
+      iconColor: 'text-[#10B981]',
+      groupHoverBg: 'group-hover:bg-[#10B981]',
+      groupHoverText: 'group-hover:text-white',
+      borderGlow: 'shadow-[0_0_20px_rgba(16,185,129,0.3)]',
+      gradientBorder: 'from-[#10B981]/30 via-[#3B82F6]/20 to-transparent',
+      title: '👨‍🏫 Teacher In-Charge',
+      content: (
+        <>
+          <p className="text-white font-semibold mb-1">Jitendra Sir</p>
+          <p className="text-gray-500 text-xs font-medium mb-3">Teacher Coordinator</p>
+          <a
+            href="tel:+919415301473"
+            aria-label="Call Jitendra Sir at +91 94153 01473"
+            className="inline-flex items-center gap-2 text-[#10B981] hover:text-white transition-colors font-medium text-sm bg-[#10B981]/10 hover:bg-[#10B981]/20 px-4 py-2 rounded-xl border border-[#10B981]/20 hover:border-[#10B981]/40"
+          >
+            <Phone size={14} />
+            -
+          </a>
+        </>
+      ),
+    },
+    {
+      icon: User,
+      iconColor: 'text-[#FF4D9D]',
+      groupHoverBg: 'group-hover:bg-[#FF4D9D]',
+      groupHoverText: 'group-hover:text-white',
+      borderGlow: 'shadow-[0_0_20px_rgba(255,77,157,0.3)]',
+      gradientBorder: 'from-[#FF4D9D]/30 via-[#FF8A00]/20 to-transparent',
+      title: '👨‍🏫 Teacher In-Charge',
+      content: (
+        <>
+          <p className="text-white font-semibold mb-1">Krishna Sir</p>
+          <p className="text-gray-500 text-xs font-medium mb-3">Teacher Coordinator</p>
+          <a
+            href="tel:+919415111234"
+            aria-label="Call Krishna Sir at +91 94151 11234"
+            className="inline-flex items-center gap-2 text-[#FF4D9D] hover:text-white transition-colors font-medium text-sm bg-[#FF4D9D]/10 hover:bg-[#FF4D9D]/20 px-4 py-2 rounded-xl border border-[#FF4D9D]/20 hover:border-[#FF4D9D]/40"
           >
             <Phone size={14} />
             -

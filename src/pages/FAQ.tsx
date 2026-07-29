@@ -13,7 +13,7 @@ const FAQ = () => {
     },
     {
       q: "What is the network connection fee?",
-      a: "The node registration fee is ₹500. This allocates server space (table), two operator stations (chairs), and a basic power relay."
+      a: "The node registration fee is ₹200. This allocates server space (table), two operator stations (chairs), and a basic power relay."
     },
     {
       q: "Do I retain the data (profits)?",

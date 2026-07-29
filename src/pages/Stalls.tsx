@@ -182,10 +182,10 @@ const Stalls = () => {
                         {showEmojiFallback ? (
                           <span className="text-2xl select-none pointer-events-none">{showEmojiFallback}</span>
                         ) : (
-                          <img
+<img
                             src={iconData.icon}
                             alt={stall.category}
-                            className="w-7 h-7 object-contain select-none pointer-events-none"
+                            className="w-12 h-12 object-contain select-none pointer-events-none scale-110"
                             loading="lazy"
                             onError={() => handleIconError(stall.id, iconData.label)}
                           />
