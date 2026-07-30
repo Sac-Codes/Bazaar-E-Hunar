@@ -185,7 +185,7 @@ const Stalls = () => {
 <img
                             src={iconData.icon}
                             alt={stall.category}
-                            className="w-12 h-12 object-contain select-none pointer-events-none scale-110"
+                            className="w-10 h-10 object-cover select-none pointer-events-none"
                             loading="lazy"
                             onError={() => handleIconError(stall.id, iconData.label)}
                           />

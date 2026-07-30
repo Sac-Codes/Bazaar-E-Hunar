@@ -229,13 +229,13 @@ const Gallery = () => {
               {lightboxIndex + 1} / {galleryImages.length}
             </div>
 
-            {/* Image Container — occupies ~90% of viewport */}
-            <div className="absolute inset-0 flex items-center justify-center p-12 md:p-16 lg:p-20" onClick={function(e: React.MouseEvent) { e.stopPropagation(); }}>
+            {/* Image Container — occupies ~90% of viewport with proper aspect-ratio handling */}
+            <div className="absolute inset-0 flex items-center justify-center p-6 sm:p-8 md:p-10 lg:p-12" onClick={function(e: React.MouseEvent) { e.stopPropagation(); }}>
               <motion.div
                 key={lightboxIndex}
-                initial={{ opacity: 0, scale: 0.92 }}
+                initial={{ opacity: 0, scale: 0.90 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.92 }}
+                exit={{ opacity: 0, scale: 0.90 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 className="flex items-center justify-center w-full h-full"
               >
@@ -243,8 +243,24 @@ const Gallery = () => {
                   ref={imgRef}
                   src={currentImage.src}
                   alt={currentImage.alt}
-                  className="max-w-[95%] max-h-[90vh] w-auto h-auto object-contain rounded-xl md:rounded-2xl shadow-2xl select-none"
+                  className="max-w-[95%] max-h-[88vh] w-auto h-auto object-contain rounded-xl md:rounded-2xl shadow-2xl select-none"
                   draggable={false}
+                  onLoad={function(e: React.SyntheticEvent<HTMLImageElement>) {
+                    const img = e.currentTarget;
+                    const isLandscape = img.naturalWidth > img.naturalHeight;
+                    const isPortrait = img.naturalHeight > img.naturalWidth;
+                    // Adjust object-fit based on aspect ratio for optimal display
+                    if (isLandscape) {
+                      img.style.maxHeight = '85vh';
+                      img.style.maxWidth = '95%';
+                    } else if (isPortrait) {
+                      img.style.maxHeight = '90vh';
+                      img.style.maxWidth = '85%';
+                    } else {
+                      img.style.maxHeight = '85vh';
+                      img.style.maxWidth = '85%';
+                    }
+                  }}
                 />
               </motion.div>
             </div>
