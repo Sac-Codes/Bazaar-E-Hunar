@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom';
 import { 
   Users, Lightbulb, Sparkles, Rocket, Target, 
   Pizza, Palette, Gamepad2, Bot, ShoppingBag, Music, Trophy, 
-  Play, Star, Zap, XCircle
+  Play, Star, Zap, ShieldCheck, ArrowRight
 } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import PageWrapper from '../components/PageWrapper';
 import PromotionalBanner from '../components/PromotionalBanner';
 import HeroVideo from '../components/HeroVideo';
 import SectionDivider from '../components/SectionDivider';
-import { trackHeroCTA } from '../services/analytics';
+import { trackHeroCTA, trackVerificationCTA } from '../services/analytics';
 // import MeetTheTeam from '../components/MeetTheTeam'; // Hidden as per requirement
 
 const CATEGORIES = [
@@ -115,16 +115,16 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-10 text-center max-w-5xl">
         <motion.div initial={{ opacity: 0, y: 30, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.8, type: 'spring', bounce: 0.3 }} className="flex flex-col items-center">
           
-{/* Premium Badge */}
+          {/* Premium Badge — Verification Phase Active */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="badge-premium mb-10 !border-[#FF4D9D]/30 !text-[#FF4D9D]"
-            style={{ borderColor: 'rgba(255,77,157,0.3)', color: '#FF4D9D' }}
+            className="badge-premium mb-10"
+            style={{ borderColor: 'rgba(255,138,0,0.3)', color: '#FF8A00' }}
           >
-            <XCircle size={14} className="text-[#FF4D9D]" />
-            Registration Closed — Under Verification
+            <span className="w-2 h-2 rounded-full bg-[#FF8A00] animate-pulse" />
+            Verification Phase Active
           </motion.div>
           
           {/* Bilingual Hero Heading */}
@@ -160,12 +160,12 @@ const HeroSection = () => {
             Celebrating Innovation <span className="text-[#FFD54A]">•</span> Creativity <span className="text-[#FFD54A]">•</span> Entrepreneurship
           </motion.p>
 
-{/* Premium CTA Buttons */}
+          {/* Premium CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-            <Link to="/stalls" className="btn-premium text-lg px-10 py-4 w-full sm:w-auto shadow-lg group !border-[#FF4D9D]/30 !text-[#FF4D9D]"
-              style={{ borderColor: 'rgba(255,77,157,0.3)', color: '#FF4D9D' }}>
-              <XCircle size={20} />
-              Registration Closed
+            <Link to="/register" onClick={() => trackVerificationCTA('home_hero')} className="btn-premium text-lg px-10 py-4 w-full sm:w-auto shadow-lg group">
+              <ShieldCheck size={20} className="group-hover:scale-110 transition-transform" />
+              Team Verification
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link to="/about" onClick={() => trackHeroCTA('explore_more')} className="btn-outline text-lg px-10 py-4 w-full sm:w-auto">
               <Play size={20} /> Explore More
@@ -325,18 +325,18 @@ const CTASection = () => {
             <Rocket size={36} className="text-[#07111F]" />
           </motion.div>
 
-<h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight">
-            Registration{' '}
-            <span className="text-gradient-warm">Closed</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight">
+            Team{' '}
+            <span className="text-gradient-warm">Verification</span> Open
           </h2>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-            Stall registrations for Hunar Bazaar 2026 are now closed. All entries are under verification. Explore the stalls and get ready for the festival!
+            Registrations are now closed. All registered teams must complete the verification form to confirm their participation and receive stall allotment.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/stalls" className="btn-premium text-lg px-10 py-4 shadow-xl shadow-[#FF8A00]/25 group !border-[#FF4D9D]/30 !text-[#FF4D9D]"
-              style={{ borderColor: 'rgba(255,77,157,0.3)', color: '#FF4D9D' }}>
-              <XCircle size={20} />
-              Registration Closed
+            <Link to="/register" onClick={() => trackVerificationCTA('home_cta_section')} className="btn-premium text-lg px-10 py-4 shadow-xl shadow-[#FF8A00]/25 group">
+              <ShieldCheck size={20} />
+              Complete Verification
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link to="/about" onClick={() => trackHeroCTA('learn_more')} className="btn-outline text-lg px-10 py-4">
               Learn More

@@ -158,3 +158,23 @@ export function trackExternalLink(url: string): void {
   trackEvent('external_link_click', { url });
 }
 
+/** Track verification form opened (source: register_page, home, navbar, footer, banner) */
+export function trackVerificationFormOpen(source: string): void {
+  trackEvent('verification_form_open', { source });
+}
+
+/** Track verification CTA click (source: home, navbar, footer, banner, contact) */
+export function trackVerificationCTA(source: string): void {
+  trackEvent('verification_cta_click', { source });
+}
+
+/** Track timeline interaction */
+export function trackTimelineInteraction(action: string): void {
+  trackEvent('timeline_interaction', { action });
+}
+
+/** Track status banner click */
+export function trackStatusBannerClick(): void {
+  trackEvent('status_banner_click');
+}
+

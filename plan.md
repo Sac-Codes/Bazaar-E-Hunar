@@ -1,69 +1,77 @@
-# Hunar Bazaar 2026 — Final Production Update Plan
+# Verification Portal & Event Progress Timeline — Implementation Plan
 
 ## Information Gathered
-
-**Project**: React 19 + Vite + TypeScript + Tailwind CSS + Framer Motion + Firebase + GA4  
-**Current stalls**: 92 stalls in `stalls.ts` (IDs S-001 to S-092)  
-**Stall categories**: Arts & Crafts, Bakery & Desserts, Books & Stationery, Food & Beverages, Games & Activities, Handmade Accessories, Others  
-**Excel file**: `src/assets/Hunar Bazaar 2026 (Responses).xlsx` — contains all registration data  
-**Existing verification scripts**: Multiple `.cjs` files in root that analyzed previous Excel files
+- **Current state**: Registration Closed phase implemented across all components
+- **Verification form URL**: `https://docs.google.com/forms/d/e/1FAIpQLSdswH0Q_CUdEJzsJco3B8BWMCz8ZBjmzh9v-YWFEvVb3ZuPjA/viewform?usp=dialog`
+- **Event stages**: Registrations (✅ Completed) → Verification & Stall Allotment (🟠 Active) → Stall Setup (⚪ Upcoming) → Event Day (⚪ Upcoming) → Results & Certificates (⚪ Upcoming)
+- **Existing analytics**: `trackEvent`, `trackRegisterClick`, `trackHeroCTA`, `trackExternalLink` functions available
 
 ## Plan
 
-### Phase 1: Final Student Response Verification
-- Write comprehensive verification script to parse the existing `Hunar Bazaar 2026 (Responses).xlsx`
-- Compare all entries against the 92 current stalls
-- Apply validation rules: spam detection, duplicate detection, latest timestamp rule
-- Only append genuinely new stalls, update existing stalls with latest valid info
-- Preserve stall IDs, categories, and all UI features
+### 1. New Component: `src/components/EventTimeline.tsx`
+- Premium animated timeline component
+- Desktop: Horizontal layout
+- Mobile: Vertical layout
+- 5 stages with visual states (completed/active/upcoming)
+- Framer Motion animations (node fade-in, connector animation, pulse on active)
+- Respects `prefers-reduced-motion`
+- GPU-accelerated via `transform: translate3d(0,0,0)`
 
-### Phase 2: Registration Closed Implementation
-- Update all registration UI elements across the site:
-  - Home.tsx: Hero badge, CTA buttons, text
-  - Register.tsx: Full page replacement with Registration Closed notice
-  - MainLayout.tsx: Navbar "Register Stall" button, mobile menu, footer CTA
-  - PromotionalBanner.tsx: Update timing text
-  - Stalls.tsx: Remove "Register Your Stall" from expanded details
-  - StallStatistics.tsx: Update "Registration Open" status
-  - Contact.tsx: Update CTA at bottom
-- Show professional "Registration Closed" notice with organizing committee message
+### 2. New Analytics: `src/services/analytics.ts`
+- Add `trackVerificationFormOpen(source: string)` function
+- Add `trackVerificationCTA(source: string)` function
 
-### Phase 3: Stall Icon Polish
-- Fix icon rendering in circular badges in Stalls.tsx
-- Ensure icons stay within container (80-90% occupancy)
-- No clipping, no overflow, no stretching
-- Consistent across all categories
+### 3. New File: `src/pages/Register.tsx` — Complete Redesign
+- Page order: Status Card → Event Timeline → Verification Card → Help Card
+- Status Card: "Current Event Status — Verification & Stall Allotment Phase"
+- Verification Card: "Verification & Stall Allotment Portal" with CTA button to Google Form
+- Help Card: Contact coordinators
+- Verification Form opens in new tab with `target="_blank"` `rel="noopener noreferrer"`
+- No direct Google Form redirect
 
-### Phase 4: Performance Optimization
-- Add React.memo to appropriate components
-- Use useMemo/useCallback where beneficial
-- Optimize animations: FloatingParticles, FloatingOrbs, AuroraBackground
-- HeroVideo optimizations
-- Mobile responsiveness improvements
-- Respect prefers-reduced-motion
+### 4. Update: `src/pages/Home.tsx`
+- Hero badge: "🟠 Verification Phase Active"
+- CTA buttons: "Register Now" → "Team Verification" (links to /register)
+- CTASection: Update text to verification phase messaging
+- Track verification CTA clicks
 
-### Phase 5: Production Audit
-- Verify all pages: Home, About, Gallery, Stalls, Register, Rules, FAQ, Contact, EventMap
-- Verify components: HeroVideo, LoadingScreen, Navbar, Footer, Firebase, GA, SEO
-- Check for broken imports, missing assets, console errors, TypeScript errors
+### 5. Update: `src/layouts/MainLayout.tsx`
+- Navbar: "Registration Closed" → "Verification" (links to /register)
+- Mobile menu: "Registration Closed" → "Verification" (links to /register)
+- Footer: "Registration Closed" → "Verification Portal" (links to /register)
 
-### Phase 6: Production Build & Git Push
-- Run `npm run build` — zero errors
-- Push to GitHub repo `Sac-Codes/Bazaar-E-Hunar`
+### 6. Update: `src/components/PromotionalBanner.tsx`
+- Badge: "Coming Soon — 2026 Edition" → "Team Verification Now Open"
+- Heading: Update to verification messaging
+- Button: "Complete Verification" linking to /register
 
-## Files to Modify
-1. `src/data/stalls.ts` — Update with verified data
-2. `src/pages/Home.tsx` — Registration closed UI
-3. `src/pages/Register.tsx` — Full registration closed page
-4. `src/layouts/MainLayout.tsx` — Navbar/footer CTA updates
-5. `src/components/PromotionalBanner.tsx` — Text update
-6. `src/components/StallStatistics.tsx` — Status update
-7. `src/pages/Stalls.tsx` — Icon fix + remove register CTA
-8. `src/pages/Contact.tsx` — CTA update
-9. `src/pages/FAQ.tsx` — Registration reference update
-10. `src/components/FloatingParticles.tsx` — Performance optimization
-11. `src/components/FloatingOrbs.tsx` — Performance optimization
-12. `src/components/AuroraBackground.tsx` — Performance optimization
-13. `src/components/HeroVideo.tsx` — Performance optimization
-14. `src/components/LoadingScreen.tsx` — Performance optimization
+### 7. Update: `src/components/PromoPosters.tsx`
+- First poster: "Registrations Open" → "Verification & Stall Allotment"
+- Update icon/color to match verification phase
 
+### 8. Update: `src/pages/Contact.tsx`
+- Footer CTA: "Registrations Are Now Closed" → "Proceed to Verification"
+- Link to /register
+
+### 9. Update: `src/pages/FAQ.tsx`
+- Add new FAQ items about verification phase
+- Keep existing registration FAQs but note they're archived
+
+### 10. Update: `src/pages/Stalls.tsx`
+- Minor: Update the "Registration Closed" badge in expanded details to reference verification
+
+## Dependent Files
+- `src/components/EventTimeline.tsx` (NEW)
+- `src/pages/Register.tsx` (REWRITE)
+- `src/pages/Home.tsx` (EDIT)
+- `src/layouts/MainLayout.tsx` (EDIT)
+- `src/components/PromotionalBanner.tsx` (EDIT)
+- `src/components/PromoPosters.tsx` (EDIT)
+- `src/pages/Contact.tsx` (EDIT)
+- `src/pages/FAQ.tsx` (EDIT)
+- `src/pages/Stalls.tsx` (EDIT)
+- `src/services/analytics.ts` (EDIT)
+
+## Followup Steps
+1. Run `npm run build` to verify zero errors
+2. Git add, commit, push to bazaar/main

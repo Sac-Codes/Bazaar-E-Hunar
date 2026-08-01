@@ -1,26 +1,25 @@
-# Hunar Bazaar 2026 — Final Production Update TODO
+# Verification Portal — Implementation Checklist
 
-## Phase 1: Final Stall Verification ✅
-- [x] S-101 "The craft corner" added to stalls.ts
-- [x] 101 total stalls (S-001 to S-101)
-- [x] Duplicates removed, spam-filtered
+## Phase 1: Event Progress Timeline
+- [ ] Create src/components/EventTimeline.tsx
 
-## Phase 2: Registration Closed ✅
-- [x] Home.tsx — Updated badge, CTA buttons, CTASection
-- [x] Register.tsx — Replaced with Registration Closed page
-- [x] MainLayout.tsx — Updated navbar, mobile menu, footer
-- [x] Stalls.tsx — Removed "Register Your Stall", added "Registration Closed"
-- [x] StallStatistics.tsx — Updated to "🔴 Registration Closed — Under Verification"
-- [x] Contact.tsx — Updated bottom CTA section
-- [x] PromotionalBanner.tsx — "Coming Soon" is about event, not registration
+## Phase 2: Analytics
+- [ ] Add verification tracking functions to analytics.ts
 
-## Phase 3: Performance Optimization
-- [ ] AuroraBackground.tsx — Add prefers-reduced-motion
-- [ ] LoadingScreen.tsx — Add React.memo + useCallback
-- [ ] StallStatistics.tsx — Memoize AnimatedCounter/ProgressBar
+## Phase 3: Register Page → Verification Portal
+- [ ] Rewrite src/pages/Register.tsx
 
-## Phase 4: Build Verification
+## Phase 4: Workflow Update
+- [ ] Update Home.tsx (hero badge, CTAs, CTASection)
+- [ ] Update MainLayout.tsx (navbar, mobile menu, footer)
+- [ ] Update PromotionalBanner.tsx
+- [ ] Update PromoPosters.tsx
+- [ ] Update Contact.tsx
+- [ ] Update FAQ.tsx
+- [ ] Update Stalls.tsx
+
+## Phase 5: Build Verification
 - [ ] npm run build (zero errors)
 
-## Phase 5: Git Push
-- [ ] Push to Sac-Codes/Bazaar-E-Hunar
+## Phase 6: Git Push
+- [ ] git add, commit, push to bazaar/main
