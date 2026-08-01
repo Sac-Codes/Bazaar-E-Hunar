@@ -1,42 +1,26 @@
 # Hunar Bazaar 2026 — Final Production Update TODO
 
-## Phase 1: Stall Data ✅
-- [x] Audit existing dataset (100 stalls, no duplicates)
-- [x] 1 new valid stall found: "The craft corner" by Shreshtha
-- [x] 3 invalid/spam entries rejected
-- [x] 117 Excel rows analyzed, 103 existing matches, 10 duplicates removed
+## Phase 1: Final Stall Verification ✅
+- [x] S-101 "The craft corner" added to stalls.ts
+- [x] 101 total stalls (S-001 to S-101)
+- [x] Duplicates removed, spam-filtered
 
-## Phase 2: Add S-101 Stall
-- [ ] Append "The craft corner" as S-101 to stalls.ts
+## Phase 2: Registration Closed ✅
+- [x] Home.tsx — Updated badge, CTA buttons, CTASection
+- [x] Register.tsx — Replaced with Registration Closed page
+- [x] MainLayout.tsx — Updated navbar, mobile menu, footer
+- [x] Stalls.tsx — Removed "Register Your Stall", added "Registration Closed"
+- [x] StallStatistics.tsx — Updated to "🔴 Registration Closed — Under Verification"
+- [x] Contact.tsx — Updated bottom CTA section
+- [x] PromotionalBanner.tsx — "Coming Soon" is about event, not registration
 
-## Phase 3: Registration Closed
-- [ ] Register.tsx — Replace with Registration Closed page
-- [ ] Home.tsx — Hero badge, CTA buttons, CTA section
-- [ ] MainLayout.tsx — Navbar, mobile menu, footer
-- [ ] PromotionalBanner.tsx — Update timing text
-- [ ] Stalls.tsx — Remove "Register Your Stall" from expanded card
-- [ ] StallStatistics.tsx — Update "Registration Open" status
-- [ ] Contact.tsx — Update bottom CTA
-- [ ] FAQ.tsx — Update registration Q&A
-- [ ] PromoPosters.tsx — Update "Registrations Open" text
-
-## Phase 4: Stall Icons
-- [ ] Verify icons fit (~85% badge, centered, no overflow) — VERIFIED OK
-
-## Phase 5: Performance Optimization
+## Phase 3: Performance Optimization
 - [ ] AuroraBackground.tsx — Add prefers-reduced-motion
-- [ ] LoadingScreen.tsx — Add memo + useCallback
-- [ ] StallStatistics.tsx — memoize components
-- [ ] Gallery.tsx — Arrow functions, memo
-- [ ] PageWrapper.tsx — Add memo
+- [ ] LoadingScreen.tsx — Add React.memo + useCallback
+- [ ] StallStatistics.tsx — Memoize AnimatedCounter/ProgressBar
 
-## Phase 6: Fix Broken Assets
-- [ ] EventAbout.tsx — Fix Wecome_Hunar_bazaar.jpg → welcome_hunar_bazaar.jpg
-- [ ] EventMemories.tsx — Fix case + missing images
-- [ ] team.ts — Replace missing .JPG with dicebear avatars
-
-## Phase 7: Build Verification
+## Phase 4: Build Verification
 - [ ] npm run build (zero errors)
 
-## Phase 8: Git Push
-- [ ] Commit and push to bazaar/main
+## Phase 5: Git Push
+- [ ] Push to Sac-Codes/Bazaar-E-Hunar

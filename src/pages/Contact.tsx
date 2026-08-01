@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import PageWrapper from '../components/PageWrapper';
 import { submitContactMessage, type ContactMessage } from '../services/contactService';
-import { trackContactSubmit, trackHeroCTA } from '../services/analytics';
+import { trackContactSubmit } from '../services/analytics';
 
 const Contact = () => {
   const [formData, setFormData] = useState<ContactMessage>({

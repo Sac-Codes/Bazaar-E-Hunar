@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { 
-  ArrowRight, Users, Lightbulb, Sparkles, Rocket, Target, 
+  Users, Lightbulb, Sparkles, Rocket, Target, 
   Pizza, Palette, Gamepad2, Bot, ShoppingBag, Music, Trophy, 
   Play, Star, Zap, XCircle
 } from 'lucide-react';
@@ -9,7 +9,7 @@ import PageWrapper from '../components/PageWrapper';
 import PromotionalBanner from '../components/PromotionalBanner';
 import HeroVideo from '../components/HeroVideo';
 import SectionDivider from '../components/SectionDivider';
-import { trackRegisterClick, trackHeroCTA } from '../services/analytics';
+import { trackHeroCTA } from '../services/analytics';
 // import MeetTheTeam from '../components/MeetTheTeam'; // Hidden as per requirement
 
 const CATEGORIES = [

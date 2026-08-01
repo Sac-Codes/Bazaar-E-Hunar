@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import FloatingParticles from '../components/FloatingParticles';
 import AuroraBackground from '../components/AuroraBackground';
 import FloatingOrbs from '../components/FloatingOrbs';
-import { trackSocialClick, trackRegisterClick } from '../services/analytics';
+import { trackSocialClick } from '../services/analytics';
 import hunarBazaarLogo from '../assets/hunar-bazaar-logo.png';
 
 // --- CUSTOM CURSOR ---
