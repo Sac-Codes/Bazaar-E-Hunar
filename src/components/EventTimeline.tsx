@@ -72,14 +72,15 @@ const TimelineNode = memo(
   }) => {
     const isCompleted = stage.status === 'completed';
     const isActive = stage.status === 'active';
-    const isUpcoming = stage.status === 'upcoming';
 
-const nodeVariants = {
+    const nodeVariants = {
       hidden: { opacity: 0, scale: 0.5 },
       visible: {
         opacity: 1,
         scale: 1,
-        transition: { delay: index * 0.15, duration: 0.5, ease: 'easeOut' as const },
+        transition: prefersReducedMotion
+          ? { duration: 0 }
+          : { delay: index * 0.15, duration: 0.5, ease: 'easeOut' as const },
       },
     };
 
@@ -139,9 +140,9 @@ const nodeVariants = {
           {/* Active Badge */}
           {isActive && (
             <motion.div
-              initial={{ opacity: 0, y: 5 }}
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.5 }}
               className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-[#FF8A00] text-white text-[8px] font-bold uppercase tracking-widest shadow-lg shadow-[#FF8A00]/30"
             >
               Active
@@ -198,13 +199,17 @@ const ConnectorLine = memo(
     return (
       <div className="flex-1 flex items-center justify-center px-0 md:px-2">
         <motion.div
-          initial={{ scaleX: 0 }}
+          initial={prefersReducedMotion ? false : { scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{
-            delay: index * 0.15 + 0.3,
-            duration: 0.6,
-            ease: 'easeOut',
-          }}
+          transition={
+            prefersReducedMotion
+              ? { duration: 0 }
+              : {
+                  delay: index * 0.15 + 0.3,
+                  duration: 0.6,
+                  ease: 'easeOut',
+                }
+          }
           className={`h-1 w-full rounded-full origin-left ${
             isCompleted
               ? 'bg-gradient-to-r from-[#10B981] to-[#10B981]'
@@ -298,10 +303,12 @@ const EventTimeline = memo(
         hidden: { opacity: 0 },
         visible: {
           opacity: 1,
-          transition: { staggerChildren: 0.1 },
+          transition: prefersReducedMotion
+            ? { duration: 0 }
+            : { staggerChildren: 0.1 },
         },
       }),
-      []
+      [prefersReducedMotion]
     );
 
     return (
@@ -370,13 +377,17 @@ const EventTimeline = memo(
                     {index < STAGES.length - 1 && (
                       <div className="w-0.5 h-8 my-1">
                         <motion.div
-                          initial={{ scaleY: 0 }}
+                          initial={prefersReducedMotion ? false : { scaleY: 0 }}
                           animate={{ scaleY: 1 }}
-                          transition={{
-                            delay: index * 0.15 + 0.3,
-                            duration: 0.6,
-                            ease: 'easeOut',
-                          }}
+                          transition={
+                            prefersReducedMotion
+                              ? { duration: 0 }
+                              : {
+                                  delay: index * 0.15 + 0.3,
+                                  duration: 0.6,
+                                  ease: 'easeOut',
+                                }
+                          }
                           className={`w-full h-full origin-top rounded-full ${
                             stage.status === 'completed'
                               ? 'bg-[#10B981]'

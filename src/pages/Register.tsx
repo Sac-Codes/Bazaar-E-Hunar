@@ -1,4 +1,4 @@
-import { ShieldCheck, ClipboardCheck, ArrowRight, HelpCircle, ExternalLink, CheckCircle, Clock, Phone, Mail } from 'lucide-react';
+import { ShieldCheck, ClipboardCheck, HelpCircle, ExternalLink, CheckCircle, Clock, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import PageWrapper from '../components/PageWrapper';

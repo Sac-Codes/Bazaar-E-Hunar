@@ -1,3 +1,21 @@
+# TS6133 Build Fix — Current Task
+
+## Step 1: Fix EventTimeline.tsx
+- [x] Remove unused `isUpcoming` local variable in TimelineNode
+- [x] Integrate `prefersReducedMotion` into connector/node animations
+- [x] Apply reduced-motion handling to remaining animations
+
+## Step 2: Fix Register.tsx
+- [x] Remove unused `ArrowRight` and `Mail` imports
+
+## Step 3: Build Verification
+- [x] npm run build (zero TS errors, zero Vite errors)
+
+## Step 4: Git Push
+- [ ] git add, commit, push to bazaar/main
+
+---
+
 # Verification Portal — Implementation Checklist
 
 ## Phase 1: Event Progress Timeline
