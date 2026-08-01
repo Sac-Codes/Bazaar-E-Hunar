@@ -489,7 +489,7 @@ const Contact = () => {
           </div>
         </motion.div>
 
-        {/* Footer CTA */}
+{/* Footer CTA */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -499,7 +499,7 @@ const Contact = () => {
         >
           <div className="glass-card-premium p-10 md:p-14 text-center relative overflow-hidden bg-gradient-to-br from-[#111827]/80 via-[#1A233A]/60 to-[#111827]/80 border border-white/5">
             {/* Decorative background glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-to-r from-[#00E5FF]/5 via-[#8B5CF6]/5 to-[#FF8A00]/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-to-r from-[#FF4D9D]/5 via-[#8B5CF6]/5 to-[#FF8A00]/5 rounded-full blur-[100px] pointer-events-none" />
             
             <div className="relative z-10">
               <motion.h2 
@@ -508,7 +508,7 @@ const Contact = () => {
                 viewport={{ once: true }}
                 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tight"
               >
-                Ready to Showcase Your Talent?
+                Registrations Are Now Closed
               </motion.h2>
               <motion.p 
                 initial={{ opacity: 0, y: 15 }}
@@ -517,7 +517,7 @@ const Contact = () => {
                 transition={{ delay: 0.1 }}
                 className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed font-medium"
               >
-                Join Hunar Bazaar 2026 and become part of an unforgettable celebration of creativity, innovation, and entrepreneurship.
+                All stall registrations for Hunar Bazaar 2026 are now closed. All entries are currently under verification. Thank you for your overwhelming response!
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
@@ -526,12 +526,11 @@ const Contact = () => {
                 transition={{ delay: 0.2 }}
               >
                 <Link
-                  to="/register"
-                  onClick={() => trackHeroCTA('contact_register')}
+                  to="/stalls"
                   className="btn-festival inline-flex items-center gap-2 px-8 py-4 text-base font-bold tracking-wide"
-                  aria-label="Register Your Stall"
+                  aria-label="Explore Stalls"
                 >
-                  Register Your Stall
+                  Explore Stalls
                   <ArrowRight size={20} />
                 </Link>
               </motion.div>

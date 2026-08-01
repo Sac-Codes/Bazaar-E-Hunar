@@ -243,24 +243,8 @@ const Gallery = () => {
                   ref={imgRef}
                   src={currentImage.src}
                   alt={currentImage.alt}
-                  className="max-w-[95%] max-h-[88vh] w-auto h-auto object-contain rounded-xl md:rounded-2xl shadow-2xl select-none"
+                  className="max-w-[95vw] max-h-[90vh] w-auto h-auto object-contain rounded-xl md:rounded-2xl shadow-2xl select-none"
                   draggable={false}
-                  onLoad={function(e: React.SyntheticEvent<HTMLImageElement>) {
-                    const img = e.currentTarget;
-                    const isLandscape = img.naturalWidth > img.naturalHeight;
-                    const isPortrait = img.naturalHeight > img.naturalWidth;
-                    // Adjust object-fit based on aspect ratio for optimal display
-                    if (isLandscape) {
-                      img.style.maxHeight = '85vh';
-                      img.style.maxWidth = '95%';
-                    } else if (isPortrait) {
-                      img.style.maxHeight = '90vh';
-                      img.style.maxWidth = '85%';
-                    } else {
-                      img.style.maxHeight = '85vh';
-                      img.style.maxWidth = '85%';
-                    }
-                  }}
                 />
               </motion.div>
             </div>

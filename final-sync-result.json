@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-08-01T04:42:30.284Z",
+  "excelFile": "Hunar Bazaar 2026 (Responses).xlsx",
+  "sheet": "Form Responses 1",
+  "totalExcelRows": 117,
+  "existingStallsInDataset": 101,
+  "duplicateSubmissionsRemoved": 10,
+  "existingMatches": 103,
+  "rejectedInvalid": 3,
+  "newValidStalls": 1,
+  "potentialUpdates": 4,
+  "newStalls": [
+    {
+      "name": "The craft corner",
+      "owner": "Shreshtha",
+      "phone": "8957734061",
+      "category": "Arts & Crafts",
+      "classStr": "11 C1",
+      "description": "A craft is a manual activity focused on making useful or decorative objects using specialized skills, hand tools, and physical materials. Key categories include textile work, portrait , painting.Core Elements of Craft",
+      "priceRange": "80 - 350 Range",
+      "investment": "100 - 200 something",
+      "requirements": "Table",
+      "team": "Shruti Singh 11 A1",
+      "row": 116,
+      "timestamp": 46234.67119188658
+    }
+  ],
+  "isSynchronized": false
+}

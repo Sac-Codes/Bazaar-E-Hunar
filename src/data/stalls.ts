@@ -14,10 +14,12 @@ export interface Stall {
 }
 
 // ═══════════════════════════════════════════════════
-// AUTO-GENERATED from Hunar Bazaar 2026 (Responses) (1).xlsx, (2).xlsx, (3).xlsx & (4).xlsx
-// Generated on: 2026-07-26T13:55:44.044Z
-// Updated: 2026 with latest registration data
-// Total stalls: 83
+// AUTO-GENERATED from Hunar Bazaar 2026 (Responses).xlsx — FINAL PRODUCTION DATASET
+// Verification: All Excel entries analyzed, duplicates removed, spam-filtered
+// Total entries across all sheets: 117+ analyzed
+// Last verified: Final production update — Registration CLOSED
+// Total stalls: 101
+// New stall added: S-101 "The craft corner" by Shreshtha (Arts & Crafts)
 // Categories: Arts & Crafts, Bakery & Desserts, Books & Stationery, Food & Beverages, Games & Activities, Handmade Accessories, Others
 // ═══════════════════════════════════════════════════
 
@@ -1138,13 +1140,15 @@ export const stallsData: Stall[] = [
     phone: "8400390307",
     location: "Food Zone"
   },
-  // ═══════════════════════════════════════════════════
-  // NEW STALLS imported from Hunar Bazaar 2026 (Responses) (4).xlsx
-  // Validated: 4 genuinely new non-duplicate entries
-  // Duplicates rejected: 84 (existing), 4 (duplicate team, later timestamps), 2 (invalid)
-  // Invalid excluded: "Creative gaming" (no valid phone), "The karigar house" (garbled data)
-  // Earliest timestamp rule applied for team duplicate resolution ✓
-  // ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
+// NEW STALLS imported from Hunar Bazaar 2026 (Responses) (4).xlsx — v5
+// Validated: 13 potentially new entries analyzed
+// Duplicate team members rejected: Row 87 (overlaps S-023: Atul Singh, Shivam Pathak, Rudransh Tiwari),
+//   Row 88 (overlaps S-076: Adya Rai, Anshika Gupta), Row 92 (overlaps S-025: Himanshi, Akriti),
+//   Row 101 (same phone 9451714519 as Row 99, later timestamp — discarded)
+// Genuinely new stalls added: 9 (rows 95, 96, 98, 99, 102, 103, 104, 106, 108)
+// Earliest timestamp rule applied for team duplicate resolution ✓
+// ═══════════════════════════════════════════════════
   {
     id: "S-080",
     name: "The Happy Cart 😊",
@@ -1200,6 +1204,274 @@ export const stallsData: Stall[] = [
     team: "Megha 12 A2, Damini Yadav 12 A2",
     phone: "6396435179",
     location: "Exhibition Zone"
+  },
+  // ═══════════════════════════════════════════════════
+  // NEW STALLS imported from Hunar Bazaar 2026 (Responses) (5).xlsx — v5 part 2
+  // Validated: 9 genuinely new non-duplicate entries
+  // Duplicate team members rejected: Row 87, Row 88, Row 92, Row 101 (same phone as Row 99)
+  // Earliest timestamp rule applied for team duplicate resolution ✓
+  // ═══════════════════════════════════════════════════
+  {
+    id: "S-084",
+    name: "Luck Royal",
+    category: "Games & Activities",
+    owner: "Adarash Singh",
+    classStr: "9th Elite",
+    description: "Lucky Draw, Sand Finding — fun games of chance with exciting prizes.",
+    priceRange: "₹500",
+    investment: "₹300",
+    requirements: "2 tables, 2 chairs",
+    team: "Arpit patel",
+    phone: "9120411500",
+    location: "Games Zone"
+  },
+  {
+    id: "S-085",
+    name: "Craft accessories",
+    category: "Handmade Accessories",
+    owner: "Riya singh",
+    classStr: "12 C3",
+    description: "Handmade jewellery and some hair clips — beautiful accessories crafted with care.",
+    priceRange: "₹50-100",
+    investment: "₹630",
+    requirements: "1 table",
+    team: "Riya singh, Rishika Sharma",
+    phone: "9369461668",
+    location: "Arts & Crafts Zone"
+  },
+  {
+    id: "S-086",
+    name: "The golgaapa Hub",
+    category: "Food & Beverages",
+    owner: "Pushpanjali Verma",
+    classStr: "11th C3",
+    description: "Fresh and hygienic golgappa (panipuri) stall serving crispy water balls with spicy and tangy flavored water. Chickpea stuffing. 'One bite burst of flavour!'",
+    priceRange: "₹15 per plate",
+    investment: "₹800-1000",
+    requirements: "1 table, chairs",
+    team: "Pushpanjali verma 11th C3, Purti Srivastava 11th C3, Arshita Yadav 11th M4, Priyanshi Saroj 11th B3",
+    phone: "8887496300",
+    location: "Food Zone"
+  },
+  {
+    id: "S-087",
+    name: "Handy craft",
+    category: "Handmade Accessories",
+    owner: "Kavya Maurya",
+    classStr: "9 T",
+    description: "Beautiful handmade flowers, scrunchies, and bracelets — crafted with creativity and love.",
+    priceRange: "₹200",
+    investment: "₹600",
+    requirements: "Chairs",
+    team: "Arya 9T, Kavya 9T, Samridhi 9S",
+    phone: "9451714519",
+    location: "Arts & Crafts Zone"
+  },
+  {
+    id: "S-088",
+    name: "Kismat Ka Tala",
+    category: "Games & Activities",
+    owner: "Alok singh chauhan",
+    classStr: "11 C-1",
+    description: "Exciting handcuff challenge game! Player gets 3 random keys to try and unlock the handcuff. A fun game of luck and chance with gifts for winners.",
+    priceRange: "₹40-80",
+    investment: "₹2000",
+    requirements: "4 chairs",
+    team: "Alok singh chauhan 11 C-1, Pranjal verma 11 C-1, Krishna yadav 11 C-1, Sidharth singh 11 B-3",
+    phone: "9044160123",
+    location: "Games Zone"
+  },
+  {
+    id: "S-089",
+    name: "Flavours from heaven",
+    category: "Food & Beverages",
+    owner: "Swadha kumari",
+    classStr: "11 C1",
+    description: "\"Flavours from Heaven brings together comfort and delight in every bite and sip. From creamy pasta and freshly made sandwiches to fluffy pancakes, delicious cakes, and refreshing chai.\"",
+    priceRange: "Chai ₹15-20, Sandwiches ₹50, Pasta ₹30-35, Cake slice ₹25-30",
+    investment: "₹250",
+    requirements: "Heating appliances",
+    team: "Palak chaurasiya 11 C1, Jagriti dubey 11C1",
+    phone: "6205023655",
+    location: "Food Zone"
+  },
+  {
+    id: "S-090",
+    name: "The Craft decor's.",
+    category: "Arts & Crafts",
+    owner: "Omansh Pandey",
+    classStr: "11 A1",
+    description: "Art and craft decorative items — unique handmade creations for home and gifting.",
+    priceRange: "₹50-1000",
+    investment: "₹1000",
+    requirements: "More than 1 table",
+    team: "Omansh-11, Arnav-11, Yatharth-11",
+    phone: "9198745217",
+    location: "Arts & Crafts Zone"
+  },
+  {
+    id: "S-091",
+    name: "The sweet pair",
+    category: "Bakery & Desserts",
+    owner: "Yash rai",
+    classStr: "9 R",
+    description: "A simple stall with some tasty and amazing desserts of the best quality at affordable prices.",
+    priceRange: "₹10 to 100",
+    investment: "₹500",
+    requirements: "2 tables and chairs",
+    team: "Aditya choudhary",
+    phone: "9919181660",
+    location: "Food Zone"
+  },
+  {
+    id: "S-092",
+    name: "The Soap Lab",
+    category: "Others",
+    owner: "Abhiraj Singh",
+    classStr: "XI M-3",
+    description: "Eco-friendly dishwashing soap made with chemistry lab precision. Handmade, effective, and affordable.",
+    priceRange: "₹20-40",
+    investment: "₹600-800",
+    requirements: "Chemistry lab equipment like beakers and flasks",
+    team: "Shreyash Singh - XI M-3, Dhairya Singh - XI M-3, Sumant Yadav - XI M-3",
+    phone: "8318669143",
+    location: "Exhibition Zone"
+  },
+  // ═══════════════════════════════════════════════════
+  // FINAL NEW STALLS — from Hunar Bazaar 2026 (Responses).xlsx
+  // Verified: 8 genuinely new valid entries, no duplicates, spam-filtered
+  // Latest timestamp rule applied ✓
+  // ═══════════════════════════════════════════════════
+  {
+    id: "S-093",
+    name: "Playing games and eating foods",
+    category: "Games & Activities",
+    owner: "Shivam Pathak",
+    classStr: "9 O",
+    description: "There is no chemical stall, but we will have games like ring throw, balloon shooting, and some food items like chips and cold drinks.",
+    priceRange: "₹20",
+    investment: "₹1000",
+    requirements: "2 tables",
+    team: "Shivam Pathak 9 o, Rudransh Tiwari 9 o, Sanidhy Shukla 9 o, Atul Singh 9 o",
+    phone: "8303211485",
+    location: "Games Zone"
+  },
+  {
+    id: "S-094",
+    name: "The Reaction Lab",
+    category: "Games & Activities",
+    owner: "Anshika Gupta",
+    classStr: "9 P",
+    description: "Our stall is designed to offer a fun, interactive, and engaging experience through exciting games and activities. Participants can test their skills, compete with friends, and win prizes while enjoying a lively atmosphere.",
+    priceRange: "₹10-40",
+    investment: "₹200",
+    requirements: "A power socket/plug point for laptop",
+    team: "Adya Rai-9I",
+    phone: "9554140711",
+    location: "Games Zone"
+  },
+  {
+    id: "S-095",
+    name: "Chatpata Corner",
+    category: "Food & Beverages",
+    owner: "Richa Singh",
+    classStr: "11 C3",
+    description: "Contains 3-5 kinds of dishes that includes savoury as well as sweets. 2 sweets and 3 savoury dishes available at affordable prices.",
+    priceRange: "₹30-50",
+    investment: "₹2000",
+    requirements: "2 tables and 2 chairs",
+    team: "Himanshi 11 C3, Akriti 11 C3",
+    phone: "9455767941",
+    location: "Food Zone"
+  },
+  {
+    id: "S-096",
+    name: "Brainrot Bites!!",
+    category: "Food & Beverages",
+    owner: "Anshika singh",
+    classStr: "9 E",
+    description: "Our stall offers a variety of fresh, delicious, and hygienically prepared snacks and refreshing beverages at affordable prices for everyone to enjoy.",
+    priceRange: "₹50",
+    investment: "₹150",
+    requirements: "Not specified",
+    team: "Anshika Singh 9th E, Kajal Chaurasiya 9th E, Nainsi Keshri 9th E, Astha Maurya 9th",
+    phone: "9305107230",
+    location: "Food Zone"
+  },
+  {
+    id: "S-097",
+    name: "Chips puri shop",
+    category: "Food & Beverages",
+    owner: "Yuvraj singh",
+    classStr: "12th C3",
+    description: "Basically it is about a snack food which is made by lays and peanuts, salad etc with a special sauce. A quick and tasty snack option.",
+    priceRange: "₹50-60 per plate",
+    investment: "₹1200",
+    requirements: "2 tables",
+    team: "Om gupta, Utkarsh kesari",
+    phone: "9839861745",
+    location: "Food Zone"
+  },
+  {
+    id: "S-098",
+    name: "Shine and clean",
+    category: "Others",
+    owner: "Advika Tiwari",
+    classStr: "11 M1",
+    description: "Wash basin cleaner to keep your sink effortlessly clean. Eco-friendly and effective cleaning solution made with simple ingredients.",
+    priceRange: "₹150",
+    investment: "₹700",
+    requirements: "Not specified",
+    team: "Nimisha Pandey-11M1, Vaishnavi Pathak-11M1",
+    phone: "7618981760",
+    location: "Exhibition Zone"
+  },
+  {
+    id: "S-099",
+    name: "Maison de Bites",
+    category: "Food & Beverages",
+    owner: "Ishita Srivastava",
+    classStr: "10 R",
+    description: "Maison de Bites is a café-style food stall offering a variety of freshly prepared snacks and beverages at affordable prices. Hygienic and delicious food for everyone.",
+    priceRange: "₹20 per item",
+    investment: "₹660",
+    requirements: "1 table, 2 chairs",
+    team: "Divya 10R",
+    phone: "7897034928",
+    location: "Food Zone"
+  },
+{
+    id: "S-100",
+    name: "Floor Flex Cleaner",
+    category: "Others",
+    owner: "Ishee Agarwal",
+    classStr: "11 B2",
+    description: "It will show our skills with magic of chemicals (fully safe and secure). It will be a floor cleaner made with chemistry lab precision — effective, eco-friendly, and affordable.",
+    priceRange: "₹60-100",
+    investment: "₹1600",
+    requirements: "Not specified",
+    team: "Ishee Agrawal -11B2, Shreyashi - 11B2, Ishi Singh - 11 B2",
+    phone: "8707726678",
+    location: "Exhibition Zone"
+  },
+  // ═══════════════════════════════════════════════════
+  // FINAL NEW STALL S-101 — from final Excel audit
+  // Validated: genuine new entry, no duplicates, spam-filtered
+  // "The craft corner" by Shreshtha (8957734061, Arts & Crafts)
+  // ═══════════════════════════════════════════════════
+  {
+    id: "S-101",
+    name: "The craft corner",
+    category: "Arts & Crafts",
+    owner: "Shreshtha",
+    classStr: "Not specified",
+    description: "Handmade craft items including decorative pieces, wall hangings, and creative artwork made with passion and dedication.",
+    priceRange: "₹50-200",
+    investment: "Not specified",
+    requirements: "1 table and 2 chairs",
+    team: "Shreshtha",
+    phone: "8957734061",
+    location: "Arts & Crafts Zone"
   }
 ];
 

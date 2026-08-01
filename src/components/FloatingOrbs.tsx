@@ -1,10 +1,33 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 interface FloatingOrbsProps {
   className?: string;
 }
 
 const FloatingOrbs = ({ className = '' }: FloatingOrbsProps) => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  if (prefersReducedMotion) return null;
+
+  const visibleOrbs = isMobile ? 3 : 6;
+
   const orbs = [
     {
       size: 'w-16 h-16',
@@ -101,7 +124,7 @@ const FloatingOrbs = ({ className = '' }: FloatingOrbsProps) => {
       className={`fixed inset-0 pointer-events-none z-0 overflow-hidden ${className}`}
       aria-hidden="true"
     >
-      {orbs.map((orb, index) => (
+      {orbs.slice(0, visibleOrbs).map((orb, index) => (
         <motion.div
           key={index}
           className={`absolute ${orb.position} ${orb.size} ${orb.color} ${orb.border} ${orb.glow} rounded-full flex items-center justify-center backdrop-blur-sm`}

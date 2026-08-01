@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { 
   ArrowRight, Users, Lightbulb, Sparkles, Rocket, Target, 
   Pizza, Palette, Gamepad2, Bot, ShoppingBag, Music, Trophy, 
-  Play, Star, Zap
+  Play, Star, Zap, XCircle
 } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import PageWrapper from '../components/PageWrapper';
@@ -115,15 +115,16 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-10 text-center max-w-5xl">
         <motion.div initial={{ opacity: 0, y: 30, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.8, type: 'spring', bounce: 0.3 }} className="flex flex-col items-center">
           
-          {/* Premium Badge */}
+{/* Premium Badge */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="badge-premium mb-10"
+            className="badge-premium mb-10 !border-[#FF4D9D]/30 !text-[#FF4D9D]"
+            style={{ borderColor: 'rgba(255,77,157,0.3)', color: '#FF4D9D' }}
           >
-            <Sparkles size={14} className="text-[#FFD54A]" />
-            Registrations Now Open
+            <XCircle size={14} className="text-[#FF4D9D]" />
+            Registration Closed — Under Verification
           </motion.div>
           
           {/* Bilingual Hero Heading */}
@@ -159,11 +160,12 @@ const HeroSection = () => {
             Celebrating Innovation <span className="text-[#FFD54A]">•</span> Creativity <span className="text-[#FFD54A]">•</span> Entrepreneurship
           </motion.p>
 
-          {/* Premium CTA Buttons */}
+{/* Premium CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-            <Link to="/register" onClick={() => trackRegisterClick('hero')} className="btn-premium text-lg px-10 py-4 w-full sm:w-auto shadow-lg group">
-              Register Your Stall
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            <Link to="/stalls" className="btn-premium text-lg px-10 py-4 w-full sm:w-auto shadow-lg group !border-[#FF4D9D]/30 !text-[#FF4D9D]"
+              style={{ borderColor: 'rgba(255,77,157,0.3)', color: '#FF4D9D' }}>
+              <XCircle size={20} />
+              Registration Closed
             </Link>
             <Link to="/about" onClick={() => trackHeroCTA('explore_more')} className="btn-outline text-lg px-10 py-4 w-full sm:w-auto">
               <Play size={20} /> Explore More
@@ -323,17 +325,18 @@ const CTASection = () => {
             <Rocket size={36} className="text-[#07111F]" />
           </motion.div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight">
-            Ready to Showcase{' '}
-            <span className="text-gradient-warm">Your Talent</span>?
+<h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight">
+            Registration{' '}
+            <span className="text-gradient-warm">Closed</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
-            Join the festival and turn your creative ideas into reality. Register your stall today and become part of something extraordinary.
+            Stall registrations for Hunar Bazaar 2026 are now closed. All entries are under verification. Explore the stalls and get ready for the festival!
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/register" onClick={() => trackRegisterClick('cta_section')} className="btn-premium text-lg px-10 py-4 shadow-xl shadow-[#FF8A00]/25 group">
-              Register Now
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            <Link to="/stalls" className="btn-premium text-lg px-10 py-4 shadow-xl shadow-[#FF8A00]/25 group !border-[#FF4D9D]/30 !text-[#FF4D9D]"
+              style={{ borderColor: 'rgba(255,77,157,0.3)', color: '#FF4D9D' }}>
+              <XCircle size={20} />
+              Registration Closed
             </Link>
             <Link to="/about" onClick={() => trackHeroCTA('learn_more')} className="btn-outline text-lg px-10 py-4">
               Learn More

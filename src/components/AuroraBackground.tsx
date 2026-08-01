@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 interface AuroraBackgroundProps {
   orbs?: boolean;
@@ -11,6 +12,27 @@ const AuroraBackground = ({
   gradientMesh = true,
   className = '' 
 }: AuroraBackgroundProps) => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  if (prefersReducedMotion) {
+    return (
+      <div 
+        className={`fixed inset-0 pointer-events-none z-0 overflow-hidden ${className}`}
+        aria-hidden="true"
+      >
+        <div className="absolute inset-0 opacity-[0.03] bg-gradient-to-br from-[#FF8A00] via-[#8A5CFF] to-[#00E5FF]" />
+      </div>
+    );
+  }
+
   return (
     <div 
       className={`fixed inset-0 pointer-events-none z-0 overflow-hidden ${className}`}

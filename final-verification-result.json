@@ -1,0 +1,109 @@
+{
+  "generatedAt": "2026-07-31T15:40:47.492Z",
+  "totalExcelRows": 117,
+  "existingStalls": 92,
+  "duplicateWithinExcel": 5,
+  "existingMatches": 102,
+  "rejectedInvalid": 2,
+  "newValidStalls": 8,
+  "updateCandidates": 95,
+  "newStalls": [
+    {
+      "name": "Playing games and eating foods",
+      "owner": "Shivam  Pathak",
+      "phone": "8303211485",
+      "category": "Games & Activities",
+      "classStr": "9 O",
+      "description": "There is no chemical stall",
+      "priceRange": "20 rupees",
+      "investment": "1000",
+      "requirements": "Yes 2 Table and 2 Chairs",
+      "team": "Shivam Pathak 9 o\nRudransh Tiwari 9 o\nSanidhy Shukla 9 o\nAtul Singh 9 o"
+    },
+    {
+      "name": "The Reaction Lab",
+      "owner": "Anshika Gupta",
+      "phone": "9554140711",
+      "category": "Games & Activities",
+      "classStr": "9 P",
+      "description": "Our stall is designed to offer a fun, interactive, and engaging experience through a variety of mind games, puzzle-based challenges, and thinking activities that encourage creativity, concentration, logical reasoning, and quick decision-making. We aim to create a lively environment where students can enjoy themselves while developing important cognitive skills in a playful and competitive way. Participants will have the opportunity to take part in different exciting challenges, with attractive prizes awarded to successful players, making every attempt enjoyable and rewarding. A laptop will be used to enhance the interactive experience and ensure the smooth conduct of the activities. With affordable participation fees, exciting rewards, and a welcoming atmosphere, our stall aims to bring together learning, entertainment, teamwork, and positive thinking, giving every visitor a memorable experience.",
+      "priceRange": "10-40rs.",
+      "investment": "200rs.",
+      "requirements": "a plug point for laptop",
+      "team": "Adya Rai-9I"
+    },
+    {
+      "name": "Chatpata Corner",
+      "owner": "Richa Singh",
+      "phone": "9455767941",
+      "category": "Food & Beverages",
+      "classStr": "11 C3",
+      "description": "Contains 3-5 kinds of dishes that includes savoury as well as sweets.\n2 sweets and 3 savoury.",
+      "priceRange": "30-50",
+      "investment": "₹2000",
+      "requirements": "Electricity",
+      "team": "Himanshi 11 C3\nAkriti 11 C3"
+    },
+    {
+      "name": "Brainrot Bites!!",
+      "owner": "Anshika singh",
+      "phone": "9305107230",
+      "category": "Food & Beverages",
+      "classStr": "9 E",
+      "description": "Our stall offers a variety of fresh, delicious, and hygienically prepared snacks and beverages at affordable prices. We aim to provide tasty food, quick service, and a fun experience for everyone visiting the Hunar Bazaar.",
+      "priceRange": "₹50",
+      "investment": "150",
+      "requirements": "Electricity for induction and kettle",
+      "team": "Anshika Singh 9th E\nKajal Chaurasiya 9th E\nNainsi Keshri 9th E\nAstha Maurya 9th E"
+    },
+    {
+      "name": "Chips puri shop",
+      "owner": "Yuvraj singh",
+      "phone": "9839861745",
+      "category": "Food & Beverages",
+      "classStr": "12th C3",
+      "description": "Basically it is about a snack food which is made by lays and peanuts, salad etc for a light beverage snack",
+      "priceRange": "50-60 ruppes per plate",
+      "investment": "Around 1200",
+      "requirements": "Dustbin, table, chairs, fans, electricity, a gloves and apprevin.",
+      "team": "Om gupta, utkarsh kesari"
+    },
+    {
+      "name": "Shine and clean",
+      "owner": "Advika Tiwari",
+      "phone": "7618981760",
+      "category": "Others",
+      "classStr": "11 M1",
+      "description": "Wash basin cleaner to keep your sink effortlessly clean",
+      "priceRange": "150",
+      "investment": "700",
+      "requirements": "",
+      "team": "Nimisha Pandey-11M1\nVaishnavi Pathak-11M1"
+    },
+    {
+      "name": "Maison de Bites",
+      "owner": "Ishita Srivastava",
+      "phone": "7897034928",
+      "category": "Food & Beverages",
+      "classStr": "10 R",
+      "description": "Stall Name: Maison de Bites\n\nBrief Description:\n\nMaison de Bites is a café-style food stall offering freshly prepared snacks and refreshing beverages. Our menu includes crispy Cheese Balls, flavorful Spicy Maggi, and refreshing Pulse Mojitos. We focus on great taste, quality, hygiene, and a welcoming experience for everyone.",
+      "priceRange": "₹20 per item",
+      "investment": "₹660",
+      "requirements": "Electricity and 2 tables and 2 chairs",
+      "team": "Divya 10R"
+    },
+    {
+      "name": "Floor Flex Cleaner",
+      "owner": "Ishee Agarwal",
+      "phone": "8707726678",
+      "category": "Others",
+      "classStr": "Class 11 B2",
+      "description": "It will show our skills with magic of chemicals ( fully safe and secure) . It will be floor cleaner of different fragrance and types useful in cleaning made by our own skills and knowledge.",
+      "priceRange": "60-100",
+      "investment": "1600",
+      "requirements": "No",
+      "team": "Ishee Agrawal -11B2\nShreyashi - 11B2\nIshi Singh - 11 B2"
+    }
+  ],
+  "isSynchronized": false
+}

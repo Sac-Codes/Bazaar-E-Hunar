@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowRight, Globe, MessageCircle, Share2, Mail, Sparkles } from 'lucide-react';
+import { Menu, X, ArrowRight, Globe, MessageCircle, Share2, Mail, XCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import FloatingParticles from '../components/FloatingParticles';
 import AuroraBackground from '../components/AuroraBackground';
@@ -173,17 +173,12 @@ const MainLayout = () => {
                   );
                 })}
               </ul>
-<Link to="/register" onClick={() => trackRegisterClick('header')} className="btn-premium text-sm group relative overflow-hidden">
+<Link to="/register" className="btn-premium text-sm group relative overflow-hidden !border-[#FF4D9D]/30 !text-[#FF4D9D] hover:!text-white"
+                style={{ borderColor: 'rgba(255,77,157,0.3)', color: '#FF4D9D' }}>
                 <span className="relative z-10 flex items-center gap-2">
-                  <Sparkles size={14} />
-                  Register Stall
+                  <XCircle size={14} />
+                  Registration Closed
                 </span>
-                <ArrowRight size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-                <motion.span 
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                  animate={{ x: ['-100%', '200%'] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                />
               </Link>
             </nav>
 
@@ -250,10 +245,12 @@ const MainLayout = () => {
               >
 <Link
                   to="/register"
-                  onClick={() => { trackRegisterClick('mobile_menu'); closeMenu(); }}
-                  className="btn-premium w-full justify-center text-lg py-4 mb-8"
+                  onClick={closeMenu}
+                  className="btn-premium w-full justify-center text-lg py-4 mb-8 !border-[#FF4D9D]/30 !text-[#FF4D9D]"
+                  style={{ borderColor: 'rgba(255,77,157,0.3)', color: '#FF4D9D' }}
                 >
-                  Register Your Stall
+                  <XCircle size={20} />
+                  Registration Closed
                 </Link>
                 
 <div className="flex gap-4 justify-center">
@@ -348,15 +345,16 @@ const MainLayout = () => {
               </ul>
             </div>
 
-            {/* Action */}
+{/* Action */}
             <div className="lg:col-span-3">
-              <h3 className="font-heading font-bold mb-6 text-[#FF4D9D] tracking-wider uppercase text-xs">Engage</h3>
-              <p className="text-gray-400 mb-6 font-medium text-sm">Ready to showcase your talent? Register your stall today.</p>
-<Link to="/register" onClick={() => trackRegisterClick('footer')} className="btn-premium w-full justify-between group py-3.5 text-sm">
-                Register Now
-                <div className="w-7 h-7 rounded-full bg-[#07111F]/20 flex items-center justify-center group-hover:bg-[#07111F]/30 transition-colors">
-                  <ArrowRight size={14} />
-                </div>
+              <h3 className="font-heading font-bold mb-6 text-[#FF4D9D] tracking-wider uppercase text-xs">Status</h3>
+              <p className="text-gray-400 mb-6 font-medium text-sm">Registrations are now closed. All entries are under verification.</p>
+<Link to="/register" className="btn-premium w-full justify-between group py-3.5 text-sm !border-[#FF4D9D]/30 !text-[#FF4D9D]"
+                style={{ borderColor: 'rgba(255,77,157,0.3)', color: '#FF4D9D' }}>
+                <span className="flex items-center gap-2">
+                  <XCircle size={14} />
+                  Registration Closed
+                </span>
               </Link>
             </div>
           </div>

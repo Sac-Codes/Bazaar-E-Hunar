@@ -315,15 +315,11 @@ const StallStatistics = () => {
               </span>
             </div>
             <ProgressBar percent={stats.progress} />
-            {/* Registration Status Badge */}
+{/* Registration Status Badge */}
             <div className="mt-3 flex items-center gap-2">
-              <span className={`inline-block w-2 h-2 rounded-full ${
-                stats.isFull ? 'bg-[#FF4D9D] animate-pulse' : 'bg-[#10B981] animate-pulse'
-              }`} />
-              <span className={`text-xs font-bold ${
-                stats.isFull ? 'text-[#FF4D9D]' : 'text-[#10B981]'
-              }`}>
-                {stats.isFull ? '🔴 Registration Full' : '🟢 Registration Open'}
+              <span className="inline-block w-2 h-2 rounded-full bg-[#FF4D9D] animate-pulse" />
+              <span className="text-xs font-bold text-[#FF4D9D]">
+                🔴 Registration Closed — Under Verification
               </span>
             </div>
           </div>

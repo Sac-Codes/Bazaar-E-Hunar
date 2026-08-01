@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import { motion } from 'framer-motion';
 
 interface Particle {
@@ -26,29 +26,43 @@ const FloatingParticles = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const frameRef = useRef<number>(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   const generateParticles = useCallback(() => {
     const { innerWidth: w, innerHeight: h } = window;
+    const isMobile = w < 768;
     const particles: Particle[] = [];
-    const count = Math.min(Math.floor((w * h) / 15000), 45);
+    // Reduce particles on mobile and lower-powered devices
+    const density = isMobile ? 30000 : 15000;
+    const maxParticles = isMobile ? 12 : 45;
+    const count = Math.min(Math.floor((w * h) / density), maxParticles);
     
     for (let i = 0; i < count; i++) {
       particles.push({
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: Math.random() * 3 + 1.5,
-        opacity: Math.random() * 0.4 + 0.15,
-        duration: Math.random() * 12 + 10,
-        delay: Math.random() * 8,
+        size: Math.random() * (isMobile ? 2 : 3) + 1.5,
+        opacity: Math.random() * 0.3 + 0.1,
+        duration: Math.random() * 15 + 12,
+        delay: Math.random() * 10,
         color: COLORS[Math.floor(Math.random() * COLORS.length)],
-        shape: Math.random() > 0.7 ? 'sparkle' : Math.random() > 0.5 ? 'dot' : 'circle',
+        shape: !isMobile && Math.random() > 0.7 ? 'sparkle' : Math.random() > 0.5 ? 'dot' : 'circle',
       });
     }
     particlesRef.current = particles;
   }, []);
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
     generateParticles();
     
     const handleResize = () => {
@@ -61,7 +75,9 @@ const FloatingParticles = () => {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(frameRef.current);
     };
-  }, [generateParticles]);
+  }, [generateParticles, prefersReducedMotion]);
+
+  if (prefersReducedMotion) return null;
 
   return (
     <div
@@ -80,10 +96,10 @@ const FloatingParticles = () => {
             height: particle.shape === 'sparkle' ? particle.size * 3 : particle.size,
           }}
           animate={{
-            y: [0, -30, -60, -30, 0],
-            x: [0, 15, 0, -15, 0],
-            opacity: [0, particle.opacity, particle.opacity * 0.6, particle.opacity, 0],
-            scale: particle.shape === 'sparkle' ? [0, 1, 0.5, 1, 0] : [1, 1.2, 1, 0.8, 1],
+            y: [0, -20, -40, -20, 0],
+            x: [0, 10, 0, -10, 0],
+            opacity: [0, particle.opacity, particle.opacity * 0.5, particle.opacity, 0],
+            scale: particle.shape === 'sparkle' ? [0, 1, 0.5, 1, 0] : [1, 1.1, 1, 0.9, 1],
             rotate: particle.shape === 'sparkle' ? [0, 180, 360] : [0, 0],
           }}
           transition={{

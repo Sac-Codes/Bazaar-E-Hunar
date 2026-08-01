@@ -1,91 +1,69 @@
-# Implementation Plan — Hunar Bazaar 2026 Updates
+# Hunar Bazaar 2026 — Final Production Update Plan
 
 ## Information Gathered
 
-### Current State
-- **Stalls**: 50 stalls (S-001 to S-050) in `src/data/stalls.ts`
-- **Gallery**: Broken imports referencing non-existent files (`Wecome_Hunar_bazaar.jpg` typo, missing diy/Games images)
-- **Contact**: Sneha Ma'am (Teacher), Sachin (Student) — need Jitendra Sir & Krishna Sir
-- **Hero Video**: `Sacs_Back_Vid.mp4` — needs performance fixes
-- **New Excel**: `Hunar Bazaar 2026 (Responses) (3).xlsx` with 86 raw responses, 25 in "Valid Responses" sheet
-- **New Gallery Images**: `photo-collage.png.png`, `photo-collage.png (1).png`, `photo-collage.png (2).png`, `welcome_hunar_bazaar.jpg`
-- **Performance**: Code splitting already in App.tsx, but animations and renders can be optimized
-
-### Key Findings
-1. Gallery.tsx imports images that don't exist on disk — needs complete rebuild with available collage images
-2. The "Valid Responses" sheet (25 entries) contains pre-filtered data — most are existing stalls
-3. Several new stalls exist in the Form Responses that aren't in the current dataset
-4. Phone numbers for teachers are partially hidden ("-") — need to add with proper formatting
-
----
+**Project**: React 19 + Vite + TypeScript + Tailwind CSS + Framer Motion + Firebase + GA4  
+**Current stalls**: 92 stalls in `stalls.ts` (IDs S-001 to S-092)  
+**Stall categories**: Arts & Crafts, Bakery & Desserts, Books & Stationery, Food & Beverages, Games & Activities, Handmade Accessories, Others  
+**Excel file**: `src/assets/Hunar Bazaar 2026 (Responses).xlsx` — contains all registration data  
+**Existing verification scripts**: Multiple `.cjs` files in root that analyzed previous Excel files
 
 ## Plan
 
-### Step 1: Write a stall comparison script
-- Parse the new Excel, extract Valid Responses (25 entries)
-- Compare each entry against existing `stallsData` (50 stalls)
-- Detect duplicates by: Team name, Stall title, Phone, Members, Category
-- Merge duplicates using earliest timestamp
-- Flag invalid entries (random, spam, incomplete, testing, etc.)
-- Generate only genuinely new stalls
+### Phase 1: Final Student Response Verification
+- Write comprehensive verification script to parse the existing `Hunar Bazaar 2026 (Responses).xlsx`
+- Compare all entries against the 92 current stalls
+- Apply validation rules: spam detection, duplicate detection, latest timestamp rule
+- Only append genuinely new stalls, update existing stalls with latest valid info
+- Preserve stall IDs, categories, and all UI features
 
-### Step 2: Update `src/data/stalls.ts` with new stalls
-- Append only new valid stalls with next available IDs (S-051 onwards)
-- Preserve existing IDs and data
-- Update the auto-generated comment header
+### Phase 2: Registration Closed Implementation
+- Update all registration UI elements across the site:
+  - Home.tsx: Hero badge, CTA buttons, text
+  - Register.tsx: Full page replacement with Registration Closed notice
+  - MainLayout.tsx: Navbar "Register Stall" button, mobile menu, footer CTA
+  - PromotionalBanner.tsx: Update timing text
+  - Stalls.tsx: Remove "Register Your Stall" from expanded details
+  - StallStatistics.tsx: Update "Registration Open" status
+  - Contact.tsx: Update CTA at bottom
+- Show professional "Registration Closed" notice with organizing committee message
 
-### Step 3: Update Contact page (`src/pages/Contact.tsx`)
-- Add Jitendra Sir and Krishna Sir as Teacher Incharges
-- Same design pattern as existing teacher card
-- Use `Phone`, `User` icons from lucide-react
-- Maintain spacing, responsive layout
+### Phase 3: Stall Icon Polish
+- Fix icon rendering in circular badges in Stalls.tsx
+- Ensure icons stay within container (80-90% occupancy)
+- No clipping, no overflow, no stretching
+- Consistent across all categories
 
-### Step 4: Rebuild Gallery (`src/pages/Gallery.tsx`)
-- Replace all old image imports with new collage images
-- `welcome_hunar_bazaar.jpg` as first/featured/largest image
-- Collage images: `photo-collage.png.png`, `photo-collage.png (1).png`, `photo-collage.png (2).png`
-- Premium masonry layout with balanced sizes
-- Hover zoom, lazy loading, fade animations
-- Improved lightbox with minimal overlay
+### Phase 4: Performance Optimization
+- Add React.memo to appropriate components
+- Use useMemo/useCallback where beneficial
+- Optimize animations: FloatingParticles, FloatingOrbs, AuroraBackground
+- HeroVideo optimizations
+- Mobile responsiveness improvements
+- Respect prefers-reduced-motion
 
-### Step 5: Optimize Hero Video (`src/components/HeroVideo.tsx`)
-- Ensure correct preload, autoplay, muted, loop, playsInline
-- GPU acceleration with `will-change-transform`
-- Prevent video restart on navigation using mounted state tracking
-- Optimize mobile playback
+### Phase 5: Production Audit
+- Verify all pages: Home, About, Gallery, Stalls, Register, Rules, FAQ, Contact, EventMap
+- Verify components: HeroVideo, LoadingScreen, Navbar, Footer, Firebase, GA, SEO
+- Check for broken imports, missing assets, console errors, TypeScript errors
 
-### Step 6: Performance Optimization (across components)
-- **React.memo** on StallStatistics, TeamMemberCard, FeaturedHighlights
-- **useMemo/useCallback** for expensive computations in Stalls.tsx
-- **Lazy-load** Gallery, EventMap pages (already done in App.tsx)
-- **Framer Motion**: Replace layout-heavy animations with transform/opacity
-- **Images**: Add `loading="lazy"`, `decoding="async"` to all local images
-- **Reduce re-renders**: Memoize filtered stalls, statistics calculations
-- **Optimize FloatingParticles**: Reduce particle count on mobile, use `will-change`
-- **Optimize FloatingOrbs**: Reduce orbs count on mobile
+### Phase 6: Production Build & Git Push
+- Run `npm run build` — zero errors
+- Push to GitHub repo `Sac-Codes/Bazaar-E-Hunar`
 
-### Step 7: Responsive Fixes & Code Quality
-- Review layouts for all breakpoints (320px-1920px)
-- Remove console logs, unused imports
-- Ensure TypeScript strictness
-- Clean up temp script files
-
-### Step 8: Build Verification
-- Run `npm run build`
-- Fix any TS errors, Vite errors, broken imports
-
-### Dependent Files to Edit:
-1. `src/data/stalls.ts` — Add new stalls
-2. `src/pages/Contact.tsx` — Add teacher incharges
-3. `src/pages/Gallery.tsx` — Rebuild with new images
-4. `src/components/HeroVideo.tsx` — Performance optimization
-5. `src/components/StallStatistics.tsx` — Memo optimization
-6. `src/components/FloatingParticles.tsx` — Mobile optimization
-7. `src/components/FloatingOrbs.tsx` — Mobile optimization
-8. `src/components/FeaturedHighlights.tsx` — Memo optimization (check if exists)
-
-### Follow-up Steps:
-1. Clean up temporary scripts (parse-new-excel-temp.cjs, check-valid-sheet.cjs)
-2. Build & verify
-3. Test all existing features
+## Files to Modify
+1. `src/data/stalls.ts` — Update with verified data
+2. `src/pages/Home.tsx` — Registration closed UI
+3. `src/pages/Register.tsx` — Full registration closed page
+4. `src/layouts/MainLayout.tsx` — Navbar/footer CTA updates
+5. `src/components/PromotionalBanner.tsx` — Text update
+6. `src/components/StallStatistics.tsx` — Status update
+7. `src/pages/Stalls.tsx` — Icon fix + remove register CTA
+8. `src/pages/Contact.tsx` — CTA update
+9. `src/pages/FAQ.tsx` — Registration reference update
+10. `src/components/FloatingParticles.tsx` — Performance optimization
+11. `src/components/FloatingOrbs.tsx` — Performance optimization
+12. `src/components/AuroraBackground.tsx` — Performance optimization
+13. `src/components/HeroVideo.tsx` — Performance optimization
+14. `src/components/LoadingScreen.tsx` — Performance optimization
 

@@ -1,12 +1,11 @@
 import { useState, useRef, useCallback } from 'react';
-import { Search, Filter, ChevronDown, ChevronUp, MapPin } from 'lucide-react';
+import { Search, Filter, ChevronDown, ChevronUp, MapPin, XCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import PageWrapper from '../components/PageWrapper';
 import StallStatistics from '../components/StallStatistics';
 import { stallsData, categories } from '../data/stalls';
 import { getCategoryIcon } from '../data/stallIcons';
-import { trackStallSearch, trackCategoryFilter, trackStallView, trackRegisterClick } from '../services/analytics';
+import { trackStallSearch, trackCategoryFilter, trackStallView } from '../services/analytics';
 
 const Stalls = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -180,12 +179,12 @@ const Stalls = () => {
                         }}
                       >
                         {showEmojiFallback ? (
-                          <span className="text-2xl select-none pointer-events-none">{showEmojiFallback}</span>
+                          <span className="text-3xl select-none pointer-events-none">{showEmojiFallback}</span>
                         ) : (
-<img
+                          <img
                             src={iconData.icon}
                             alt={stall.category}
-                            className="w-10 h-10 object-cover select-none pointer-events-none"
+                            className="w-12 h-12 object-contain select-none pointer-events-none"
                             loading="lazy"
                             onError={() => handleIconError(stall.id, iconData.label)}
                           />
@@ -301,13 +300,10 @@ const Stalls = () => {
                         )}
                       </div>
 
-                      <Link
-                        to="/register"
-                        onClick={() => trackRegisterClick('stall_card')}
-                        className="mt-2 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#00E5FF] text-white font-bold text-sm hover:shadow-lg hover:shadow-[#8B5CF6]/30 transition-all duration-300"
-                      >
-                        Register Your Stall
-                      </Link>
+<div className="mt-2 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#FF4D9D] to-[#FF8A00] text-white font-bold text-sm opacity-80 cursor-not-allowed">
+                        <XCircle size={16} />
+                        Registration Closed
+                      </div>
                     </div>
                   )}
                 </motion.div>
