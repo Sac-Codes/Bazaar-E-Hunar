@@ -12,7 +12,7 @@
 - [x] npm run build (zero TS errors, zero Vite errors)
 
 ## Step 4: Git Push
-- [ ] git add, commit, push to bazaar/main
+- [x] git add, commit, push to bazaar/main
 
 ---
 
