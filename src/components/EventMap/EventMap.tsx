@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Utensils, Palette, Gamepad2, Sparkles, RotateCcw } from 'lucide-react';
+import { Utensils, Palette, Gamepad2, Sparkles, RotateCcw } from 'lucide-react';
 import './eventMap.css';
 
 /* ─────────────────────────────────────────────────────────────
@@ -83,20 +83,6 @@ const STEP = 0.22;
 const VIEW_W = 1100;
 const VIEW_H = 910;
 
-/* ── Important locations actually present in the supplied map ── */
-const IMPORTANT_LOCATIONS = [
-  { id: 'main-entrance', label: 'Main Entrance', x: 383.7, y: 262 },
-  { id: 'gate', label: 'Gate', x: 341.5, y: 316 },
-  { id: 'gate2', label: 'Gate', x: 398, y: 492 },
-  { id: 'stage', label: 'Main Stage', x: 458.5, y: 463 },
-  { id: 'hostel', label: 'Boys Hostel', x: 315.5, y: 96.5 },
-  { id: 'baal', label: 'Baal Vatika', x: 940.5, y: 375 },
-  { id: 'ablock', label: 'A-Block', x: 235, y: 552 },
-  { id: 'bblock', label: 'B-Block', x: 238, y: 827.5 },
-  { id: 'ground', label: "School's Ground", x: 457.5, y: 689.5 },
-  { id: 'basket', label: 'Basketball Court', x: 763.5, y: 783.5 },
-];
-
 interface EventMapProps {
   /** Optional callback invoked when a zone is clicked/tapped (for external panels). */
   onZoneClick?: (zoneId: string) => void;
@@ -121,11 +107,9 @@ const EventMap = ({ onZoneClick }: EventMapProps) => {
   const transformRef = useRef({ scale: 1, tx: 0, ty: 0 });
   transformRef.current = { scale, tx, ty };
 
-  const applyTransform = useCallback((s: number, x: number, y: number) => {
+const applyTransform = useCallback((s: number, x: number, y: number) => {
     if (viewportRef.current) {
-      const layer = viewportRef.current.querySelector<HTMLElement>('.emap-marker-layer');
       const svg = viewportRef.current.querySelector<SVGSVGElement>('svg.emap-svg');
-      if (layer) layer.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
       if (svg) svg.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
     }
   }, []);
@@ -180,9 +164,9 @@ const EventMap = ({ onZoneClick }: EventMapProps) => {
     let stx = 0;
     let sty = 0;
 
-    const onMouseDown = (e: MouseEvent) => {
+const onMouseDown = (e: MouseEvent) => {
       if (e.button !== 0) return;
-      if ((e.target as HTMLElement).closest('button, .emap-location-pin')) return;
+      if ((e.target as HTMLElement).closest('button')) return;
       panning = true;
       sx = e.clientX;
       sy = e.clientY;
@@ -729,18 +713,8 @@ const EventMap = ({ onZoneClick }: EventMapProps) => {
                   />
                 </g>
               </g>
-            </svg>
+</svg>
           </svg>
-
-          {/* Interactive marker layer — important locations only (in sync with SVG transform) */}
-          <div className="emap-marker-layer">
-            {IMPORTANT_LOCATIONS.map((loc) => (
-              <div key={loc.id} className="emap-location-pin" style={{ left: `${(loc.x / VIEW_W) * 100}%`, top: `${(loc.y / VIEW_H) * 100}%` }} title={loc.label}>
-                <span className="emap-location-ico"><MapPin size={12} /></span>
-                <span className="emap-location-label">{loc.label}</span>
-              </div>
-            ))}
-          </div>
         </div>
 
         <div className="emap-zoom">
