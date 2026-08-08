@@ -3,10 +3,10 @@ import { MapPin, Navigation, Info, Utensils, Gamepad2, Palette, Trophy, HelpCirc
 import { motion, AnimatePresence } from 'framer-motion';
 import PageWrapper from '../components/PageWrapper';
 import CustomEventMap from '../components/EventMap/EventMap';
-import { trackMapZone, trackOpenGoogleMaps } from '../services/analytics';
+import { trackOpenGoogleMaps } from '../services/analytics';
 
 const EventMap = () => {
-  const [activeZone, setActiveZone] = useState<string | null>(null);
+  const [activeZone] = useState<string | null>(null);
 
   const zones = [
     { id: 'food', name: 'Food Zone', icon: Utensils, color: 'border-[#FF8A00]/20 text-[#FF8A00] bg-[#111827]', active: 'bg-[#FF8A00] text-[#050816] border-[#FF8A00] shadow-[0_0_20px_rgba(255,138,0,0.6)]', desc: 'Grab delicious snacks and meals prepared by our student chefs. Stalls A1-A10.', stalls: ['Burger Bliss', 'Pizza Point', 'Mocktail Bar', 'Bake My Day', 'Samosa Junction', 'Pasta Palace', 'Waffle House', 'Juice Stop', 'Chaat Corner', 'Candy Cart'] },
