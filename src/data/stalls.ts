@@ -1201,7 +1201,7 @@ export const stallsData: Stall[] = [
     priceRange: "₹5 - ₹250",
     investment: "₹1000",
     requirements: "2 tables and 2 chairs",
-    team: "Megha 12 A2, Damini Yadav 12 A2",
+    team: "Megha 12 A2, Damini Yadav 12 A2, Vaishnavi Aggarwal 12 A2",
     phone: "6396435179",
     location: "Exhibition Zone"
   },

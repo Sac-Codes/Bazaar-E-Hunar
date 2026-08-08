@@ -1,0 +1,571 @@
+/* ───────────────────────────────────────────────
+   HUNAR BAZAAR 2026 — Custom 2D Event Location Map
+   Styles scoped under `.hunar-emap` to avoid
+   global conflicts with the React app.
+   Includes: base map, category navigation,
+   zone highlighting, important-location pins.
+   ─────────────────────────────────────────────── */
+
+.hunar-emap{
+  --bg:#0c0e18;
+  --bg-glow:#171130;
+  --floor:#161a2c;
+  --floor-dot:#2a3050;
+  --wall:#f2e9d6;
+  --ink:#12141f;
+  --paper:#efe7d4;
+  --muted:#9aa0bd;
+
+  --game:#ff3355;    --game-l:#ff8298;
+  --redstall:#ff3b3b; --redstall-l:#ff8080;
+  --others:#8b6bff;  --others-l:#c2b2ff;
+  --art:#ec5cc4;     --art-l:#ffa8e6;
+  --stage:#22d3c4;   --stage-l:#7ff0e4;
+  --gate:#3ee06f;    --gate-l:#a9f5c1;
+
+  --baal:#5c7cff;    --baal-l:#a9bcff;
+  --block:#c23b46;   --block-l:#ff8f97;
+  --ground:#5fd66f;  --ground-l:#a9f0b4;
+  --road:#565c78;    --road-l:#9096b4;
+
+  --shadow: 0 20px 60px rgba(0,0,0,0.55);
+
+  font-family:'Inter', system-ui, sans-serif;
+  background:
+    radial-gradient(1100px 550px at 50% -10%, var(--bg-glow), transparent 60%),
+    var(--bg);
+  color: var(--paper);
+  width:100%;
+  border-radius:24px;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+
+.hunar-emap *{ box-sizing:border-box; margin:0; padding:0; }
+
+@media (prefers-reduced-motion: reduce){
+  .hunar-emap *{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+  }
+}
+
+.hunar-emap .emap-header{
+  text-align:center;
+  margin-bottom:22px;
+  max-width:720px;
+  margin-left:auto;
+  margin-right:auto;
+  opacity:0;
+  animation: emapFadeUp .7s ease forwards;
+}
+.hunar-emap .emap-eyebrow{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:0.72rem;
+  font-weight:600;
+  letter-spacing:0.32em;
+  color: var(--gate-l);
+  text-transform:uppercase;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.hunar-emap .emap-eyebrow::before,
+.hunar-emap .emap-eyebrow::after{
+  content:"";
+  width:22px; height:1px;
+  background: linear-gradient(90deg, transparent, var(--gate-l));
+}
+.hunar-emap .emap-eyebrow::after{ background: linear-gradient(90deg, var(--gate-l), transparent); }
+.hunar-emap .emap-header h1{
+  font-family:'Space Grotesk', sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight:700;
+  letter-spacing:-0.02em;
+  color: var(--paper);
+}
+.hunar-emap .emap-header p{
+  font-size:0.95rem;
+  color: var(--muted);
+  margin-top:8px;
+}
+
+.hunar-emap .emap-shell{
+  position:relative;
+  width:100%;
+  max-width:980px;
+  margin-left:auto;
+  margin-right:auto;
+  background: linear-gradient(180deg, #12162a, #0f1120);
+  border-radius:20px;
+  box-shadow: var(--shadow);
+  border:1px solid rgba(242,233,214,0.08);
+  overflow:hidden;
+  opacity:0;
+  animation: emapFadeUp .8s ease .12s forwards;
+}
+
+.hunar-emap .emap-viewport{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  background: var(--floor);
+  aspect-ratio: 1100/910;
+  cursor:grab;
+  touch-action:none;
+}
+.hunar-emap .emap-viewport.emap-dragging{ cursor:grabbing; }
+.hunar-emap .emap-viewport svg{
+  display:block;
+  width:100%;
+  height:100%;
+  transform-origin:0 0;
+  transition: transform 0.12s ease-out;
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+/* ---------- entrance animations ---------- */
+@keyframes emapFadeUp{
+  from{ opacity:0; transform: translateY(10px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+.hunar-emap .draw-line{
+  animation: emapDrawLine 1.05s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes emapDrawLine{ to{ stroke-dashoffset:0; } }
+
+.hunar-emap .zone-pop{
+  opacity:0;
+  transform-box: fill-box;
+  transform-origin:center;
+  animation: emapPopIn .6s cubic-bezier(.2,.9,.25,1.3) forwards;
+}
+@keyframes emapPopIn{
+  from{ opacity:0; transform: scale(0.82) translateY(6px); }
+  to{ opacity:1; transform: scale(1) translateY(0); }
+}
+
+.hunar-emap .gate-pop{
+  opacity:0;
+  transform-box: fill-box;
+  transform-origin:center;
+  animation: emapGatePop .55s cubic-bezier(.2,.8,.25,1.4) forwards;
+}
+@keyframes emapGatePop{
+  from{ opacity:0; transform:scale(0.3); }
+  to{ opacity:1; transform:scale(1); }
+}
+
+/* ---------- ambient / living venue ---------- */
+.hunar-emap .ring{
+  transform-box: fill-box;
+  transform-origin:center;
+  animation: emapRingPulse 2.6s ease-out infinite;
+}
+@keyframes emapRingPulse{
+  0%{ transform:scale(0.4); opacity:0.55; }
+  75%{ transform:scale(2.6); opacity:0; }
+  100%{ transform:scale(2.6); opacity:0; }
+}
+
+.hunar-emap .flow-path{
+  stroke-dasharray: 2 11;
+  animation: emapFlowDash 1.4s linear infinite;
+  opacity:0.55;
+}
+@keyframes emapFlowDash{ to{ stroke-dashoffset:-26; } }
+
+.hunar-emap .wander{
+  animation: emapWander linear infinite;
+}
+@keyframes emapWander{
+  0%{ transform: translate(0,0); opacity:0.55;}
+  25%{ transform: translate(18px,-10px); opacity:0.85;}
+  50%{ transform: translate(4px,14px); opacity:0.5;}
+  75%{ transform: translate(-16px,-6px); opacity:0.8;}
+  100%{ transform: translate(0,0); opacity:0.55;}
+}
+
+.hunar-emap .spotlight{
+  animation: emapBreathe 3.4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin:center;
+}
+@keyframes emapBreathe{
+  0%,100%{ opacity:0.18; transform:scale(1); }
+  50%{ opacity:0.38; transform:scale(1.06); }
+}
+
+.hunar-emap .zone{
+  cursor:pointer;
+  transition: filter .18s ease, transform .18s ease;
+  transform-box:fill-box;
+  transform-origin:center;
+}
+.hunar-emap .zone:hover,
+.hunar-emap .zone:focus-visible{
+  filter: brightness(1.12) drop-shadow(0 6px 16px rgba(0,0,0,0.45));
+  transform: translateY(-2px) scale(1.012);
+  outline:none;
+}
+.hunar-emap .zone:focus-visible rect,
+.hunar-emap .zone:focus-visible path{
+  stroke: var(--paper);
+  stroke-width:2;
+}
+
+.hunar-emap .gate-circle{
+  cursor:pointer;
+  transition: transform .18s ease, filter .18s ease;
+  transform-box: fill-box;
+  transform-origin:center;
+}
+.hunar-emap .gate-circle:hover,
+.hunar-emap .gate-circle:focus-visible{
+  filter: drop-shadow(0 0 10px rgba(62,224,111,0.75));
+  transform: scale(1.22);
+  outline:none;
+}
+
+/* ---------- zoom controls ---------- */
+.hunar-emap .emap-zoom{
+  position:absolute; top:12px; right:12px;
+  display:flex; flex-direction:column; gap:6px;
+  z-index:25;
+}
+.hunar-emap .emap-zoom button{
+  width:38px; height:38px;
+  border:1px solid rgba(242,233,214,0.14);
+  border-radius:10px;
+  background: rgba(20,23,40,0.85);
+  backdrop-filter: blur(6px);
+  color: var(--paper);
+  font-size:1.15rem;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 4px 14px rgba(0,0,0,0.35);
+  display:flex; align-items:center; justify-content:center;
+  transition: background .12s, transform .1s, border-color .12s;
+}
+.hunar-emap .emap-zoom button:hover{ background: rgba(34,38,64,0.95); border-color: var(--gate); transform: scale(1.05); }
+.hunar-emap .emap-zoom button:active{ transform: scale(0.95); }
+.hunar-emap .emap-zoom .reset-btn{ font-size:0.58rem; font-weight:700; letter-spacing:0.04em; font-family:'Space Grotesk',sans-serif; }
+
+/* ═══════════════════════════════════════════════════════════
+   EVENT MAP · Category Navigation & Zone Highlighting
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Category selector (4 premium cards) ── */
+.hunar-emap .emap-cat-controls{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:12px;
+  max-width:980px;
+  margin:0 auto 18px;
+  width:100%;
+}
+.hunar-emap .emap-cat-btn{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  padding:14px 16px;
+  border-radius:16px;
+  background: linear-gradient(180deg, rgba(23,27,48,0.9), rgba(16,18,31,0.9));
+  border:1px solid rgba(242,233,214,0.1);
+  color:var(--paper);
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:600;
+  font-size:0.86rem;
+  letter-spacing:0.02em;
+  cursor:pointer;
+  text-align:left;
+  box-shadow:0 4px 18px rgba(0,0,0,0.35);
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+  overflow:hidden;
+}
+.hunar-emap .emap-cat-btn .emap-cat-ico{
+  flex-shrink:0;
+  width:34px; height:34px;
+  border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  background: color-mix(in srgb, var(--cat) 22%, transparent);
+  border:1px solid color-mix(in srgb, var(--cat) 45%, transparent);
+  color:var(--cat);
+  transition: transform .2s ease;
+}
+.hunar-emap .emap-cat-btn .emap-cat-label{
+  line-height:1.2;
+}
+.hunar-emap .emap-cat-btn:hover{
+  border-color: color-mix(in srgb, var(--cat) 55%, transparent);
+  box-shadow:0 8px 26px rgba(0,0,0,0.45), 0 0 18px -4px var(--glow);
+  background: linear-gradient(180deg, rgba(30,35,60,0.95), rgba(18,20,36,0.95));
+}
+.hunar-emap .emap-cat-btn:hover .emap-cat-ico{ transform: scale(1.08); }
+.hunar-emap .emap-cat-btn.active{
+  border-color: var(--cat);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--cat) 16%, #171b30), #10121f);
+  box-shadow:0 10px 30px rgba(0,0,0,0.5), 0 0 24px -4px var(--glow);
+  color:#fff;
+}
+.hunar-emap .emap-cat-btn.active .emap-cat-ico{
+  background: var(--cat);
+  color:#07111F;
+  box-shadow:0 0 14px var(--glow);
+}
+.hunar-emap .emap-cat-btn.active .emap-cat-label{ font-weight:700; }
+.hunar-emap .emap-cat-active-dot{
+  position:absolute; top:10px; right:12px;
+  width:8px; height:8px; border-radius:50%;
+  background: var(--cat);
+  box-shadow:0 0 8px var(--glow);
+}
+
+/* ── Dim non-selected zones when a category is active ── */
+.hunar-emap.has-category .zone{
+  filter: saturate(0.35) brightness(0.72);
+  opacity:0.55;
+  transition: filter .35s ease, opacity .35s ease, transform .35s ease;
+}
+.hunar-emap.has-category .zone.is-active{
+  filter: saturate(1.15) brightness(1.12) drop-shadow(0 0 14px var(--zone-glow, var(--gate)));
+  opacity:1;
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* ── Selected category info panel ── */
+.hunar-emap .emap-cat-panel{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  max-width:980px;
+  width:100%;
+  margin:18px auto 0;
+  padding:14px 18px;
+  border-radius:16px;
+  background: linear-gradient(180deg, rgba(23,27,48,0.92), rgba(16,18,31,0.92));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border:1px solid color-mix(in srgb, var(--cat) 45%, rgba(255,255,255,0.08));
+  box-shadow:0 10px 34px rgba(0,0,0,0.5), 0 0 22px -6px var(--glow);
+  overflow:hidden;
+  position:relative;
+}
+.hunar-emap .emap-cat-panel::before{
+  content:'';
+  position:absolute; inset:0;
+  padding:1px;
+  border-radius:16px;
+  background: linear-gradient(135deg, var(--cat), transparent 60%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events:none;
+}
+.hunar-emap .emap-cat-panel-ico{
+  flex-shrink:0;
+  width:44px; height:44px;
+  border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  background: var(--cat);
+  color:#07111F;
+  box-shadow:0 0 16px var(--glow);
+}
+.hunar-emap .emap-cat-panel-body{ flex:1; min-width:0; }
+.hunar-emap .emap-cat-panel-body h3{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:1.05rem;
+  font-weight:800;
+  color:#fff;
+  letter-spacing:0.02em;
+  margin-bottom:2px;
+}
+.hunar-emap .emap-cat-panel-body p{
+  font-size:0.85rem;
+  color:var(--muted);
+  line-height:1.4;
+}
+.hunar-emap .emap-cat-panel-hint{
+  display:inline-block;
+  margin-top:4px;
+  font-size:0.72rem;
+  font-weight:700;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--cat);
+}
+.hunar-emap .emap-cat-panel-reset{
+  flex-shrink:0;
+  display:inline-flex; align-items:center; gap:6px;
+  padding:9px 14px;
+  border-radius:10px;
+  border:1px solid rgba(242,233,214,0.16);
+  background: rgba(242,233,214,0.06);
+  color:var(--paper);
+  font-family:'Space Grotesk', sans-serif;
+  font-size:0.78rem;
+  font-weight:700;
+  letter-spacing:0.04em;
+  cursor:pointer;
+  transition: background .15s, border-color .15s, transform .1s;
+}
+.hunar-emap .emap-cat-panel-reset:hover{
+  background: rgba(242,233,214,0.14);
+  border-color: var(--paper);
+}
+.hunar-emap .emap-cat-panel-reset:active{ transform: scale(0.96); }
+
+/* ═══════════════════════════════════════════════════════════
+   EVENT MAP · Important-Location Markers
+   ═══════════════════════════════════════════════════════════ */
+.hunar-emap .emap-marker-layer{
+  position:absolute;
+  inset:0;
+  transform-origin:0 0;
+  pointer-events:none;
+  z-index:5;
+}
+.hunar-emap .emap-location-pin{
+  position:absolute;
+  transform: translate(-50%, -100%);
+  pointer-events:auto;
+  display:flex; flex-direction:column; align-items:center;
+  gap:2px;
+  cursor:default;
+}
+.hunar-emap .emap-location-ico{
+  width:22px; height:22px;
+  border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(135deg, #FF8A00, #FFD54A);
+  color:#07111F;
+  box-shadow:0 2px 8px rgba(0,0,0,0.5), 0 0 10px rgba(255,138,0,0.4);
+}
+.hunar-emap .emap-location-label{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:0.6rem;
+  font-weight:700;
+  letter-spacing:0.02em;
+  color:#fff;
+  background: rgba(7,17,31,0.85);
+  border:1px solid rgba(255,255,255,0.12);
+  padding:2px 6px;
+  border-radius:6px;
+  white-space:nowrap;
+  box-shadow:0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* ---------- legend ---------- */
+.hunar-emap .emap-legend{
+  display:flex; flex-wrap:wrap; justify-content:center;
+  gap:10px 22px;
+  margin:18px auto 0;
+  padding:14px 20px;
+  background: linear-gradient(180deg, #12162a, #0f1120);
+  border-radius:14px;
+  border:1px solid rgba(242,233,214,0.08);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  max-width:980px;
+  width:100%;
+  opacity:0;
+  animation: emapFadeUp .8s ease .3s forwards;
+}
+.hunar-emap .legend-item{
+  display:flex; align-items:center; gap:8px;
+  font-size:0.82rem; font-weight:500; color: var(--paper);
+}
+.hunar-emap .legend-swatch{ width:13px; height:13px; border-radius:4px; flex-shrink:0; box-shadow: 0 0 8px 0 currentColor; }
+.hunar-emap .legend-swatch.gate{ border-radius:50%; background: var(--gate); color: var(--gate); }
+.hunar-emap .legend-swatch.game{ background: var(--game); color: var(--game); }
+.hunar-emap .legend-swatch.art{ background: var(--art); color: var(--art); }
+.hunar-emap .legend-swatch.others{ background: var(--others); color: var(--others); }
+.hunar-emap .legend-swatch.stall{ background: var(--redstall); color: var(--redstall); }
+.hunar-emap .legend-swatch.stage{ background: var(--stage); color: var(--stage); }
+.hunar-emap .legend-swatch.baal{ background: var(--baal); color: var(--baal); }
+.hunar-emap .legend-swatch.block{ background: var(--block); color: var(--block); }
+.hunar-emap .legend-swatch.ground{ background: var(--ground); color: var(--ground); }
+.hunar-emap .legend-swatch.road{ background: var(--road); color: var(--road); border-radius:2px; }
+
+/* ---------- modal ---------- */
+.hunar-emap .emap-modal-overlay{
+  position:fixed; inset:0;
+  background: rgba(6,7,14,0.6);
+  backdrop-filter: blur(3px);
+  display:flex; align-items:center; justify-content:center;
+  z-index:100;
+  opacity:0; visibility:hidden;
+  transition: opacity .18s, visibility .18s;
+  padding:16px;
+}
+.hunar-emap .emap-modal-overlay.open{ opacity:1; visibility:visible; }
+.hunar-emap .emap-modal{
+  background: linear-gradient(180deg, #171b30, #10121f);
+  border:1px solid rgba(242,233,214,0.1);
+  border-radius:16px;
+  padding:24px 26px 22px;
+  max-width:320px; width:100%;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+  transform: translateY(10px) scale(0.96);
+  transition: transform .2s cubic-bezier(.2,.9,.25,1.3);
+  position:relative;
+  border-top: 3px solid var(--emap-accent, var(--gate));
+}
+.hunar-emap .emap-modal-overlay.open .emap-modal{ transform: translateY(0) scale(1); }
+.hunar-emap .emap-modal h3{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:1.15rem; font-weight:700;
+  margin-bottom:7px; color: var(--paper);
+  padding-right:28px;
+  letter-spacing:0.01em;
+}
+.hunar-emap .emap-modal p{ font-size:0.92rem; color: var(--muted); line-height:1.55; }
+.hunar-emap .emap-modal-close{
+  position:absolute; top:10px; right:12px;
+  width:30px; height:30px; border:none;
+  background: rgba(242,233,214,0.08);
+  border-radius:8px; font-size:1.1rem; cursor:pointer;
+  color: var(--paper);
+  display:flex; align-items:center; justify-content:center;
+  transition: background .12s;
+}
+.hunar-emap .emap-modal-close:hover{ background: rgba(242,233,214,0.16); }
+
+/* ---------- gate tooltip ---------- */
+.hunar-emap .emap-tooltip{
+  position:fixed;
+  background:#171b30;
+  border:1px solid rgba(242,233,214,0.12);
+  color:#fff;
+  font-size:0.72rem; font-weight:600;
+  padding:5px 10px; border-radius:6px;
+  pointer-events:none; opacity:0;
+  transform: translateY(3px);
+  transition: opacity .12s, transform .12s;
+  z-index:40; white-space:nowrap;
+  letter-spacing:0.02em;
+}
+.hunar-emap .emap-tooltip.show{ opacity:1; transform: translateY(0); }
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .hunar-emap .emap-cat-controls{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; }
+}
+@media (max-width:640px){
+  .hunar-emap .emap-header{ margin-bottom:14px; }
+  .hunar-emap .emap-zoom button{ width:34px; height:34px; font-size:1.05rem; }
+  .hunar-emap .emap-legend{ gap:8px 14px; padding:11px 14px; }
+  .hunar-emap .legend-item{ font-size:0.78rem; }
+  .hunar-emap .legend-swatch{ width:11px; height:11px; }
+  .hunar-emap .emap-cat-controls{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:9px; }
+  .hunar-emap .emap-cat-btn{ padding:12px 12px; font-size:0.8rem; flex-direction:column; align-items:flex-start; gap:8px; }
+  .hunar-emap .emap-cat-btn .emap-cat-ico{ width:30px; height:30px; }
+  .hunar-emap .emap-cat-panel{ padding:12px 14px; flex-wrap:wrap; }
+  .hunar-emap .emap-cat-panel-reset{ width:100%; justify-content:center; }
+  .hunar-emap .emap-location-label{ font-size:0.54rem; }
+}

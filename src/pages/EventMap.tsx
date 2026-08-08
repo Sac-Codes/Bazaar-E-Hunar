@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MapPin, Navigation, Info, Utensils, Gamepad2, Palette, Trophy, HelpCircle, School, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageWrapper from '../components/PageWrapper';
+import CustomEventMap from '../components/EventMap/EventMap';
 import { trackMapZone, trackOpenGoogleMaps } from '../services/analytics';
 
 const EventMap = () => {
@@ -40,43 +41,12 @@ const EventMap = () => {
       <section className="container mx-auto px-4 md:px-8 mt-12 relative z-20">
         <div className="flex flex-col xl:flex-row gap-8 max-w-7xl mx-auto">
           
-          {/* Map Visual */}
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className="flex-1 glass-card p-6 md:p-10 border border-white/10 min-h-[500px] relative overflow-hidden flex flex-col bg-[#050816]/80">
+{/* Map Visual — Custom 2D Event Location Map */}
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className="flex-1 glass-card p-4 md:p-6 border border-white/10 min-h-[500px] relative overflow-hidden flex flex-col bg-[#050816]/80">
             <div className="absolute inset-0 bg-cyber-grid opacity-20 pointer-events-none" />
-            
-            <div className="flex gap-4 md:gap-6 mb-4 md:mb-6 h-32 md:h-40 relative z-10">
-              <div className={`flex-1 border-2 rounded-3xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ${activeZone === 'food' ? zones[0].active + ' scale-[1.02]' : zones[0].color + ' hover:scale-[1.01]'}`} onClick={() => { setActiveZone('food'); trackMapZone('food'); }}>
-                <Utensils size={32} className="mb-2" /><span className="font-bold tracking-widest uppercase text-sm">Food Court</span>
-              </div>
-              <div className={`w-32 md:w-48 border-2 rounded-3xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ${activeZone === 'help' ? zones[5].active + ' scale-[1.02]' : zones[5].color + ' hover:scale-[1.01]'}`} onClick={() => { setActiveZone('help'); trackMapZone('help'); }}>
-                <HelpCircle size={28} className="mb-2" /><span className="font-bold tracking-widest uppercase text-[10px] md:text-xs">Help Desk</span>
-              </div>
+            <div className="relative z-10 flex-1">
+              <CustomEventMap />
             </div>
-            
-            <div className="flex flex-col md:flex-row gap-4 md:gap-6 mb-4 md:mb-6 h-64 md:h-56 relative z-10">
-              <div className={`md:w-48 border-2 rounded-3xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ${activeZone === 'games' ? zones[1].active + ' scale-[1.02]' : zones[1].color + ' hover:scale-[1.01]'}`} onClick={() => { setActiveZone('games'); trackMapZone('games'); }}>
-                <Gamepad2 size={36} className="mb-3" /><span className="font-bold tracking-widest uppercase text-sm text-center">Game<br/>Zone</span>
-              </div>
-              <div className="flex-1 rounded-3xl flex flex-col items-center justify-center pointer-events-none relative overflow-hidden bg-[#0A0F1C]/50 border border-white/5">
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(0,229,255,0.05)_50%,transparent_100%)] animate-shimmer" />
-                <School size={32} className="text-gray-600 mb-2" /><span className="text-gray-500 font-bold tracking-[0.2em] uppercase text-xs">School Ground</span><span className="text-gray-700 text-[10px] mt-1">Open Area &amp; Walkway</span>
-              </div>
-              <div className={`md:w-56 border-2 rounded-3xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ${activeZone === 'stage' ? zones[4].active + ' scale-[1.02]' : zones[4].color + ' hover:scale-[1.01]'}`} onClick={() => { setActiveZone('stage'); trackMapZone('stage'); }}>
-                <Trophy size={32} className="mb-2" /><span className="font-bold tracking-widest uppercase text-sm">Main Stage</span>
-              </div>
-            </div>
-            
-            <div className="flex gap-4 md:gap-6 flex-1 relative z-10 min-h-[120px]">
-              <div className={`flex-1 border-2 rounded-3xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ${activeZone === 'art' ? zones[2].active + ' scale-[1.02]' : zones[2].color + ' hover:scale-[1.01]'}`} onClick={() => { setActiveZone('art'); trackMapZone('art'); }}>
-                <Palette size={32} className="mb-2" /><span className="font-bold tracking-widest uppercase text-sm">Art &amp; Craft</span>
-              </div>
-              <div className={`flex-[1.5] border-2 rounded-3xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ${activeZone === 'craft' ? zones[3].active + ' scale-[1.02]' : zones[3].color + ' hover:scale-[1.01]'}`} onClick={() => { setActiveZone('craft'); trackMapZone('craft'); }}>
-                <Trophy size={32} className="mb-2" /><span className="font-bold tracking-widest uppercase text-sm">DIY &amp; Innovation</span>
-              </div>
-            </div>
-            
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#00E5FF] to-[#8B5CF6] text-white px-8 py-1.5 rounded-b-xl text-[10px] font-black uppercase tracking-[0.3em] shadow-[0_0_15px_rgba(0,229,255,0.5)] z-20">ENTRANCE</div>
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-gray-800 border-t border-x border-white/10 text-gray-400 px-8 py-1.5 rounded-t-xl text-[10px] font-bold uppercase tracking-[0.3em] shadow-inner z-20">BACK GATE</div>
           </motion.div>
           
           {/* Details Panel */}

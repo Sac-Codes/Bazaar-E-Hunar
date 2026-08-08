@@ -138,6 +138,11 @@ export function trackMapZone(zone: string): void {
   trackEvent('open_map_zone', { zone });
 }
 
+/** Track when a stall is selected on the event map */
+export function trackMapStallSelect(stallId: string): void {
+  trackEvent('map_stall_select', { stall_id: stallId });
+}
+
 /** Track "Open in Google Maps" click */
 export function trackOpenGoogleMaps(): void {
   trackEvent('open_maps_directions');

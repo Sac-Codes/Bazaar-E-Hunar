@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+<title>Venue Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0c0e18;
+    --bg-glow:#171130;
+    --floor:#161a2c;
+    --floor-dot:#2a3050;
+    --wall:#f2e9d6;
+    --ink:#12141f;
+    --paper:#efe7d4;
+    --muted:#9aa0bd;
+
+    --game:#ff3355;    --game-l:#ff8298;
+    --redstall:#ff3b3b; --redstall-l:#ff8080;
+    --others:#8b6bff;  --others-l:#c2b2ff;
+    --art:#ec5cc4;     --art-l:#ffa8e6;
+    --stage:#22d3c4;   --stage-l:#7ff0e4;
+    --gate:#3ee06f;    --gate-l:#a9f5c1;
+
+    --baal:#5c7cff;    --baal-l:#a9bcff;
+    --block:#c23b46;   --block-l:#ff8f97;
+    --ground:#5fd66f;  --ground-l:#a9f0b4;
+    --road:#565c78;    --road-l:#9096b4;
+
+    --shadow: 0 20px 60px rgba(0,0,0,0.55);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+  }
+
+  body{
+    font-family:'Inter', system-ui, sans-serif;
+    background:
+      radial-gradient(1100px 550px at 50% -10%, var(--bg-glow), transparent 60%),
+      var(--bg);
+    color: var(--paper);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding: 34px 16px 44px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .header{
+    text-align:center;
+    margin-bottom:22px;
+    max-width:720px;
+    opacity:0;
+    animation: fadeUp .7s ease forwards;
+  }
+  .eyebrow{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:0.72rem;
+    font-weight:600;
+    letter-spacing:0.32em;
+    color: var(--gate-l);
+    text-transform:uppercase;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  .eyebrow::before, .eyebrow::after{
+    content:"";
+    width:22px; height:1px;
+    background: linear-gradient(90deg, transparent, var(--gate-l));
+  }
+  .eyebrow::after{ background: linear-gradient(90deg, var(--gate-l), transparent); }
+  .header h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: clamp(1.9rem, 5vw, 2.7rem);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    color: var(--paper);
+  }
+  .header p{
+    font-size:0.95rem;
+    color: var(--muted);
+    margin-top:8px;
+  }
+
+  .map-shell{
+    position:relative;
+    width:100%;
+    max-width:980px;
+    background: linear-gradient(180deg, #12162a, #0f1120);
+    border-radius:20px;
+    box-shadow: var(--shadow);
+    border:1px solid rgba(242,233,214,0.08);
+    overflow:hidden;
+    opacity:0;
+    animation: fadeUp .8s ease .12s forwards;
+  }
+
+  .map-viewport{
+    position:relative;
+    width:100%;
+    overflow:auto;
+    background: var(--floor);
+    aspect-ratio: 1100/910;
+    cursor:grab;
+    -webkit-overflow-scrolling:touch;
+  }
+  .map-viewport:active{ cursor:grabbing; }
+  .map-viewport svg{
+    display:block;
+    width:100%;
+    height:100%;
+    transform-origin:0 0;
+    transition: transform 0.12s ease-out;
+    user-select:none;
+    -webkit-user-select:none;
+  }
+
+  /* ---------- entrance animations ---------- */
+  @keyframes fadeUp{
+    from{ opacity:0; transform: translateY(10px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+  .draw-line{
+    animation: drawLine 1.05s cubic-bezier(.4,0,.2,1) forwards;
+  }
+  @keyframes drawLine{ to{ stroke-dashoffset:0; } }
+
+  .zone-pop{
+    opacity:0;
+    transform-box: fill-box;
+    transform-origin:center;
+    animation: popIn .6s cubic-bezier(.2,.9,.25,1.3) forwards;
+  }
+  @keyframes popIn{
+    from{ opacity:0; transform: scale(0.82) translateY(6px); }
+    to{ opacity:1; transform: scale(1) translateY(0); }
+  }
+
+  .gate-pop{
+    opacity:0;
+    transform-box: fill-box;
+    transform-origin:center;
+    animation: gatePop .55s cubic-bezier(.2,.8,.25,1.4) forwards;
+  }
+  @keyframes gatePop{
+    from{ opacity:0; transform:scale(0.3); }
+    to{ opacity:1; transform:scale(1); }
+  }
+
+  /* ---------- ambient / living venue ---------- */
+  .ring{
+    transform-box: fill-box;
+    transform-origin:center;
+    animation: ringPulse 2.6s ease-out infinite;
+  }
+  @keyframes ringPulse{
+    0%{ transform:scale(0.4); opacity:0.55; }
+    75%{ transform:scale(2.6); opacity:0; }
+    100%{ transform:scale(2.6); opacity:0; }
+  }
+
+  .flow-path{
+    stroke-dasharray: 2 11;
+    animation: flowDash 1.4s linear infinite;
+    opacity:0.55;
+  }
+  @keyframes flowDash{ to{ stroke-dashoffset:-26; } }
+
+  .wander{
+    animation: wander linear infinite;
+  }
+  @keyframes wander{
+    0%{ transform: translate(0,0); opacity:0.55;}
+    25%{ transform: translate(18px,-10px); opacity:0.85;}
+    50%{ transform: translate(4px,14px); opacity:0.5;}
+    75%{ transform: translate(-16px,-6px); opacity:0.8;}
+    100%{ transform: translate(0,0); opacity:0.55;}
+  }
+
+  .spotlight{
+    animation: breathe 3.4s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin:center;
+  }
+  @keyframes breathe{
+    0%,100%{ opacity:0.18; transform:scale(1); }
+    50%{ opacity:0.38; transform:scale(1.06); }
+  }
+
+  .zone{ cursor:pointer; transition: filter .18s ease, transform .18s ease; transform-box:fill-box; transform-origin:center; }
+  .zone:hover, .zone:focus-visible{
+    filter: brightness(1.12) drop-shadow(0 6px 16px rgba(0,0,0,0.45));
+    transform: translateY(-2px) scale(1.012);
+    outline:none;
+  }
+  .zone:focus-visible rect, .zone:focus-visible path{
+    stroke: var(--paper);
+    stroke-width:2;
+  }
+
+  .gate-circle{
+    cursor:pointer;
+    transition: transform .18s ease, filter .18s ease;
+    transform-box: fill-box;
+    transform-origin:center;
+  }
+  .gate-circle:hover, .gate-circle:focus-visible{
+    filter: drop-shadow(0 0 10px rgba(62,224,111,0.75));
+    transform: scale(1.22);
+    outline:none;
+  }
+
+  /* ---------- zoom controls ---------- */
+  .zoom-controls{
+    position:absolute; top:12px; right:12px;
+    display:flex; flex-direction:column; gap:6px;
+    z-index:25;
+  }
+  .zoom-controls button{
+    width:38px; height:38px;
+    border:1px solid rgba(242,233,214,0.14);
+    border-radius:10px;
+    background: rgba(20,23,40,0.85);
+    backdrop-filter: blur(6px);
+    color: var(--paper);
+    font-size:1.15rem;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 4px 14px rgba(0,0,0,0.35);
+    display:flex; align-items:center; justify-content:center;
+    transition: background .12s, transform .1s, border-color .12s;
+  }
+  .zoom-controls button:hover{ background: rgba(34,38,64,0.95); border-color: var(--gate); transform: scale(1.05); }
+  .zoom-controls button:active{ transform: scale(0.95); }
+  .zoom-controls .reset-btn{ font-size:0.58rem; font-weight:700; letter-spacing:0.04em; font-family:'Space Grotesk',sans-serif; }
+
+  /* ---------- legend ---------- */
+  .legend{
+    display:flex; flex-wrap:wrap; justify-content:center;
+    gap:10px 22px;
+    margin-top:18px;
+    padding:14px 20px;
+    background: linear-gradient(180deg, #12162a, #0f1120);
+    border-radius:14px;
+    border:1px solid rgba(242,233,214,0.08);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    max-width:980px;
+    width:100%;
+    opacity:0;
+    animation: fadeUp .8s ease .3s forwards;
+  }
+  .legend-item{
+    display:flex; align-items:center; gap:8px;
+    font-size:0.82rem; font-weight:500; color: var(--paper);
+  }
+  .legend-swatch{ width:13px; height:13px; border-radius:4px; flex-shrink:0; box-shadow: 0 0 8px 0 currentColor; }
+  .legend-swatch.gate{ border-radius:50%; background: var(--gate); color: var(--gate); }
+  .legend-swatch.game{ background: var(--game); color: var(--game); }
+  .legend-swatch.art{ background: var(--art); color: var(--art); }
+  .legend-swatch.others{ background: var(--others); color: var(--others); }
+  .legend-swatch.stall{ background: var(--redstall); color: var(--redstall); }
+  .legend-swatch.stage{ background: var(--stage); color: var(--stage); }
+  .legend-swatch.baal{ background: var(--baal); color: var(--baal); }
+  .legend-swatch.block{ background: var(--block); color: var(--block); }
+  .legend-swatch.ground{ background: var(--ground); color: var(--ground); }
+  .legend-swatch.road{ background: var(--road); color: var(--road); border-radius:2px; }
+
+  /* ---------- modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0;
+    background: rgba(6,7,14,0.6);
+    backdrop-filter: blur(3px);
+    display:flex; align-items:center; justify-content:center;
+    z-index:100;
+    opacity:0; visibility:hidden;
+    transition: opacity .18s, visibility .18s;
+    padding:16px;
+  }
+  .modal-overlay.open{ opacity:1; visibility:visible; }
+  .modal{
+    background: linear-gradient(180deg, #171b30, #10121f);
+    border:1px solid rgba(242,233,214,0.1);
+    border-radius:16px;
+    padding:24px 26px 22px;
+    max-width:320px; width:100%;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+    transform: translateY(10px) scale(0.96);
+    transition: transform .2s cubic-bezier(.2,.9,.25,1.3);
+    position:relative;
+    border-top: 3px solid var(--accent, var(--gate));
+  }
+  .modal-overlay.open .modal{ transform: translateY(0) scale(1); }
+  .modal h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.15rem; font-weight:700;
+    margin-bottom:7px; color: var(--paper);
+    padding-right:28px;
+    letter-spacing:0.01em;
+  }
+  .modal p{ font-size:0.92rem; color: var(--muted); line-height:1.55; }
+  .modal-close{
+    position:absolute; top:10px; right:12px;
+    width:30px; height:30px; border:none;
+    background: rgba(242,233,214,0.08);
+    border-radius:8px; font-size:1.1rem; cursor:pointer;
+    color: var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    transition: background .12s;
+  }
+  .modal-close:hover{ background: rgba(242,233,214,0.16); }
+
+  .tooltip{
+    position:fixed;
+    background:#171b30;
+    border:1px solid rgba(242,233,214,0.12);
+    color:#fff;
+    font-size:0.72rem; font-weight:600;
+    padding:5px 10px; border-radius:6px;
+    pointer-events:none; opacity:0;
+    transform: translateY(3px);
+    transition: opacity .12s, transform .12s;
+    z-index:40; white-space:nowrap;
+    letter-spacing:0.02em;
+  }
+  .tooltip.show{ opacity:1; transform: translateY(0); }
+
+  @media (max-width:640px){
+    body{ padding:20px 10px 30px; }
+    .header{ margin-bottom:14px; }
+    .zoom-controls button{ width:34px; height:34px; font-size:1.05rem; }
+    .legend{ gap:8px 14px; padding:11px 14px; }
+    .legend-item{ font-size:0.78rem; }
+    .legend-swatch{ width:11px; height:11px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="eyebrow">Live Wayfinding</div>
+  <h1>Venue Map</h1>
+  <p>Tap any zone to see what's there · pinch or scroll to zoom</p>
+</header>
+
+<div class="map-shell">
+  <div class="map-viewport" id="mapViewport">
+    <svg id="hallMap" viewBox="0 0 1100 910" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Campus map with Event Hall">
+      <defs>
+        <pattern id="floorDots" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse">
+          <circle cx="1.4" cy="1.4" r="1" fill="var(--floor-dot)" opacity="0.6"/>
+        </pattern>
+
+        <linearGradient id="gameGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#e0102f"/><stop offset="100%" stop-color="#ff6b83"/>
+        </linearGradient>
+        <linearGradient id="redstallGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ff3131"/><stop offset="100%" stop-color="#ff7a7a"/>
+        </linearGradient>
+        <linearGradient id="othersGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#7c5cff"/><stop offset="100%" stop-color="#c2b2ff"/>
+        </linearGradient>
+        <linearGradient id="artGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#e94bb8"/><stop offset="100%" stop-color="#ff9de3"/>
+        </linearGradient>
+        <linearGradient id="stageGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#14b8a6"/><stop offset="100%" stop-color="#7ff0e4"/>
+        </linearGradient>
+        <linearGradient id="hostelGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#e0102f"/><stop offset="100%" stop-color="#ff6b83"/>
+        </linearGradient>
+        <linearGradient id="baalGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#3f5ce0"/><stop offset="100%" stop-color="#8fa2ff"/>
+        </linearGradient>
+        <linearGradient id="blockGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#8f1620"/><stop offset="100%" stop-color="#d94b56"/>
+        </linearGradient>
+        <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4bc95d"/><stop offset="100%" stop-color="#8fe89b"/>
+        </linearGradient>
+        <radialGradient id="gateGrad" cx="35%" cy="30%" r="75%">
+          <stop offset="0%" stop-color="#c8ffd9"/><stop offset="100%" stop-color="#2fbf5f"/>
+        </radialGradient>
+        <radialGradient id="spotGrad" cx="50%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+        </radialGradient>
+
+        <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="3" stdDeviation="5" flood-opacity="0.35"/>
+        </filter>
+        <filter id="gateGlow" x="-120%" y="-120%" width="340%" height="340%">
+          <feGaussianBlur stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- CAMPUS BACKGROUND -->
+      <rect x="0" y="0" width="1100" height="910" fill="var(--bg)"/>
+      <rect x="0" y="0" width="1100" height="910" fill="url(#floorDots)" opacity="0.5"/>
+
+      <!-- ROAD -->
+      <g class="zone-pop" style="animation-delay:.15s">
+        <g fill="none" stroke="var(--road)" stroke-width="22" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M43,199 L851,199 L840,551 L288,551 L840,551 L840,579 L650,579 L650,827 L292,827"/>
+        </g>
+        <g class="flow-path" fill="none" stroke="var(--road-l)" stroke-width="2" stroke-dasharray="1 13" opacity="0.8">
+          <path d="M43,199 L851,199 L840,551 L288,551 L840,551 L840,579 L650,579 L650,827 L292,827"/>
+        </g>
+        <text x="220" y="190" font-family="Space Grotesk,sans-serif" font-weight="700" font-style="italic" font-size="15" fill="var(--paper)" letter-spacing="2">ROAD</text>
+        <path d="M760,193 L774,199 L760,205 Z" fill="var(--paper)"/>
+        <path d="M470,545 L456,551 L470,557 Z" fill="var(--paper)"/>
+        <path d="M470,821 L456,827 L470,833 Z" fill="var(--paper)"/>
+      </g>
+
+      <!-- BOYS HOSTEL -->
+      <g class="zone zone-pop" style="animation-delay:.2s" tabindex="0" role="button"
+         data-title="Boys Hostel" data-desc="Boys hostel block, north of the event hall across the road." data-color="var(--game)"
+         filter="url(#softShadow)">
+        <rect x="118" y="18" width="395" height="157" rx="6" fill="url(#hostelGrad)"/>
+        <text x="315.5" y="102" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="19" fill="var(--ink)" letter-spacing="0.5">BOYS HOSTEL</text>
+      </g>
+
+      <!-- BAAL VATIKA -->
+      <g class="zone zone-pop" style="animation-delay:.27s" tabindex="0" role="button"
+         data-title="Baal Vatika" data-desc="Baal Vatika, east of the hall along the main road." data-color="var(--baal)"
+         filter="url(#softShadow)">
+        <rect x="870" y="290" width="141" height="170" rx="6" fill="url(#baalGrad)"/>
+        <text x="940.5" y="380" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="15" fill="var(--ink)" letter-spacing="0.3">
+          <tspan x="940.5" dy="0">BAAL</tspan>
+          <tspan x="940.5" dy="19">VATIKA</tspan>
+        </text>
+      </g>
+
+      <!-- A-BLOCK -->
+      <g class="zone zone-pop" style="animation-delay:.34s" tabindex="0" role="button"
+         data-title="A-Block" data-desc="A-Block, southwest of the hall." data-color="var(--block)"
+         filter="url(#softShadow)">
+        <rect x="183" y="525" width="104" height="54" rx="6" fill="url(#blockGrad)"/>
+        <text x="235" y="557" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="14" fill="var(--paper)">A-BLOCK</text>
+      </g>
+
+      <!-- B-BLOCK -->
+      <g class="zone zone-pop" style="animation-delay:.41s" tabindex="0" role="button"
+         data-title="B-Block" data-desc="B-Block, south of the school ground." data-color="var(--block)"
+         filter="url(#softShadow)">
+        <rect x="186" y="802" width="104" height="51" rx="6" fill="url(#blockGrad)"/>
+        <text x="238" y="833" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="14" fill="var(--paper)">B-BLOCK</text>
+      </g>
+
+      <!-- SCHOOL GROUND -->
+      <g class="zone zone-pop" style="animation-delay:.48s" tabindex="0" role="button"
+         data-title="School's Ground" data-desc="The school's playing ground, south of the hall." data-color="var(--ground)"
+         filter="url(#softShadow)">
+        <rect x="313" y="591" width="289" height="197" rx="8" fill="url(#groundGrad)"/>
+        <text x="457.5" y="695" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="16" fill="var(--ink)" letter-spacing="0.3">SCHOOL'S GROUND</text>
+      </g>
+
+      <!-- BASKETBALL COURT -->
+      <g class="zone zone-pop" style="animation-delay:.55s" tabindex="0" role="button"
+         data-title="Basketball Court" data-desc="Basketball court, southeast of the hall near Baal Vatika." data-color="var(--redstall)"
+         filter="url(#softShadow)">
+        <rect x="688" y="740" width="151" height="87" rx="6" fill="url(#redstallGrad)"/>
+        <text x="763.5" y="778" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="14" fill="var(--ink)" letter-spacing="0.2">
+          <tspan x="763.5" dy="0">BASKETBALL</tspan>
+          <tspan x="763.5" dy="18">COURT</tspan>
+        </text>
+      </g>
+
+      <!-- campus-to-gate wayfinding connectors -->
+      <g fill="none" stroke="var(--gate-l)" stroke-width="2" stroke-linecap="round">
+        <path class="flow-path" d="M400,209 C392,229 386,246 383.7,262"/>
+        <path class="flow-path" d="M398,551 L398,492"/>
+      </g>
+
+      <svg x="225" y="249" width="377" height="256" viewBox="0 0 1000 700" preserveAspectRatio="none">
+      <!-- FLOOR -->
+      <rect x="36" y="36" width="928" height="628" fill="var(--floor)"/>
+      <rect x="36" y="36" width="928" height="628" fill="url(#floorDots)"/>
+
+      <!-- ambient wandering visitor dots -->
+      <g fill="var(--paper)" opacity="0.7">
+        <circle class="wander" cx="190" cy="250" r="2.6" style="animation-duration:8s; animation-delay:.2s"/>
+        <circle class="wander" cx="220" cy="480" r="2.2" style="animation-duration:9.5s; animation-delay:1.4s"/>
+        <circle class="wander" cx="460" cy="180" r="2.6" style="animation-duration:7.2s; animation-delay:.6s"/>
+        <circle class="wander" cx="470" cy="610" r="2.2" style="animation-duration:10s; animation-delay:2s"/>
+        <circle class="wander" cx="710" cy="250" r="2.4" style="animation-duration:8.6s; animation-delay:1s"/>
+        <circle class="wander" cx="725" cy="480" r="2.2" style="animation-duration:9s; animation-delay:.4s"/>
+      </g>
+
+      <!-- gate flow paths (decorative wayfinding) - one continuous route linking all gates -->
+      <g fill="none" stroke="var(--gate-l)" stroke-width="2" stroke-linecap="round">
+        <path class="flow-path" d="M421,53 C421,120 350,150 324,183 C333,200 420,215 460,260 C460,350 459,500 459,647"/>
+      </g>
+
+      <!-- OUTER WALLS with gate openings -->
+      <g id="hall" stroke="var(--wall)" stroke-width="3.4" fill="none" stroke-linecap="square">
+        <line class="draw-line" style="stroke-dasharray:355; stroke-dashoffset:355; animation-delay:.05s" x1="36" y1="36" x2="391" y2="36"/>
+        <line class="draw-line" style="stroke-dasharray:513; stroke-dashoffset:513; animation-delay:.1s" x1="451" y1="36" x2="964" y2="36"/>
+        <line class="draw-line" style="stroke-dasharray:628; stroke-dashoffset:628; animation-delay:.15s" x1="964" y1="36" x2="964" y2="664"/>
+        <line class="draw-line" style="stroke-dasharray:393; stroke-dashoffset:393; animation-delay:.2s" x1="36" y1="664" x2="429" y2="664"/>
+        <line class="draw-line" style="stroke-dasharray:475; stroke-dashoffset:475; animation-delay:.25s" x1="489" y1="664" x2="964" y2="664"/>
+        <line class="draw-line" style="stroke-dasharray:628; stroke-dashoffset:628; animation-delay:.05s" x1="36" y1="36" x2="36" y2="664"/>
+      </g>
+
+      <!-- INTERNAL PARTITION with Gate 2 opening -->
+      <g id="partition" stroke="var(--wall)" stroke-width="3.4" fill="none">
+        <line class="draw-line" style="stroke-dasharray:117; stroke-dashoffset:117; animation-delay:.35s" x1="309" y1="36" x2="309" y2="153"/>
+        <line class="draw-line" style="stroke-dasharray:451; stroke-dashoffset:451; animation-delay:.4s" x1="309" y1="213" x2="309" y2="664"/>
+      </g>
+
+      <!-- GAME ZONE - C-shaped structure (far left) -->
+      <g class="zone zone-pop" style="animation-delay:.55s" tabindex="0" role="button"
+         data-title="Game Zone" data-desc="Games, arcade booths and entertainment for all ages." data-color="var(--game)"
+         filter="url(#softShadow)">
+        <rect x="106" y="92" width="36" height="528" rx="4" fill="url(#gameGrad)"/>
+        <rect x="106" y="92" width="144" height="38" rx="4" fill="url(#gameGrad)"/>
+        <rect x="106" y="582" width="144" height="38" rx="4" fill="url(#gameGrad)"/>
+        <text x="124" y="260" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="14" fill="var(--ink)" letter-spacing="0.5">
+          <tspan x="124" dy="0">G</tspan><tspan x="124" dy="24">A</tspan><tspan x="124" dy="24">M</tspan><tspan x="124" dy="24">E</tspan>
+          <tspan x="124" dy="24">–</tspan>
+          <tspan x="124" dy="24">Z</tspan><tspan x="124" dy="24">O</tspan><tspan x="124" dy="24">N</tspan><tspan x="124" dy="24">E</tspan>
+        </text>
+      </g>
+
+      <!-- ART & CRAFT -->
+      <g class="zone zone-pop" style="animation-delay:.62s" tabindex="0" role="button"
+         data-title="Art &amp; Craft" data-desc="Handmade art and craft displays and stalls." data-color="var(--art)"
+         filter="url(#softShadow)">
+        <rect x="358" y="252" width="38" height="338" rx="5" fill="url(#artGrad)"/>
+        <text x="377" y="329" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="14" fill="var(--ink)" letter-spacing="0.5">
+          <tspan x="377" dy="0">A</tspan><tspan x="377" dy="22">R</tspan><tspan x="377" dy="22">T</tspan>
+          <tspan x="377" dy="26">&amp;</tspan>
+          <tspan x="377" dy="26">C</tspan><tspan x="377" dy="22">R</tspan><tspan x="377" dy="22">A</tspan><tspan x="377" dy="22">F</tspan><tspan x="377" dy="22">T</tspan>
+        </text>
+      </g>
+
+      <!-- OTHERS -->
+      <g class="zone zone-pop" style="animation-delay:.69s" tabindex="0" role="button"
+         data-title="Others" data-desc="Other participating stalls and exhibits." data-color="var(--others)"
+         filter="url(#softShadow)">
+        <rect x="540" y="307" width="127" height="100" rx="8" fill="url(#othersGrad)"/>
+        <text x="603.5" y="363" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600" font-style="italic" font-size="16.5" fill="var(--ink)">Others</text>
+      </g>
+
+      <!-- STALL 22-26 - horizontal, top row above Food Stall -->
+      <g class="zone zone-pop" style="animation-delay:.76s" tabindex="0" role="button"
+         data-title="Stall 22–26" data-desc="Stalls numbered 22 to 26." data-color="var(--redstall)"
+         filter="url(#softShadow)">
+        <rect x="589" y="92" width="178" height="38" rx="6" fill="url(#redstallGrad)"/>
+        <text x="678" y="116" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-style="italic" font-size="15" fill="var(--ink)">STALL 22-26</text>
+      </g>
+
+      <!-- FOOD STALL 1-21 -->
+      <g class="zone zone-pop" style="animation-delay:.83s" tabindex="0" role="button"
+         data-title="Food Stall 1–21" data-desc="Food stalls numbered 1 to 21." data-color="var(--redstall)"
+         filter="url(#softShadow)">
+        <rect x="769" y="132" width="50" height="440" rx="6" fill="url(#redstallGrad)"/>
+        <text x="794" y="332" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600" font-size="12" fill="var(--ink)" letter-spacing="0.3">
+          <tspan x="794" dy="0">FOOD</tspan>
+          <tspan x="794" dy="15">STALL</tspan>
+          <tspan x="794" dy="22" font-size="13.5" font-weight="700">1 – 21</tspan>
+        </text>
+      </g>
+
+      <!-- STAGE -->
+      <g class="zone zone-pop" style="animation-delay:.9s" tabindex="0" role="button"
+         data-title="Stage" data-desc="Main event stage for performances and announcements." data-color="var(--stage)"
+         filter="url(#softShadow)">
+        <rect x="552" y="553" width="135" height="67" rx="8" fill="url(#stageGrad)"/>
+        <ellipse class="spotlight" cx="619.5" cy="580" rx="52" ry="24" fill="url(#spotGrad)"/>
+        <text x="619.5" y="592" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="600" font-style="italic" font-size="17" fill="var(--ink)">Stage</text>
+      </g>
+
+      <!-- GATES -->
+      <g id="gates">
+        <g class="gate-pop" style="animation-delay:1.05s">
+          <circle class="ring" cx="421" cy="36" r="15.5" fill="none" stroke="var(--gate-l)" stroke-width="2"/>
+          <circle class="ring" cx="421" cy="36" r="15.5" fill="none" stroke="var(--gate-l)" stroke-width="2" style="animation-delay:1.3s"/>
+          <circle class="gate-circle zone" tabindex="0" role="button" data-title="Gate" data-desc="Venue access point." data-color="var(--gate)"
+                  cx="421" cy="36" r="15.5" fill="url(#gateGrad)" stroke="var(--paper)" stroke-width="2" filter="url(#gateGlow)"/>
+        </g>
+        <g class="gate-pop" style="animation-delay:1.12s">
+          <circle class="ring" cx="309" cy="183" r="15.5" fill="none" stroke="var(--gate-l)" stroke-width="2" style="animation-delay:.5s"/>
+          <circle class="ring" cx="309" cy="183" r="15.5" fill="none" stroke="var(--gate-l)" stroke-width="2" style="animation-delay:1.8s"/>
+          <circle class="gate-circle zone" tabindex="0" role="button" data-title="Gate" data-desc="Venue access point." data-color="var(--gate)"
+                  cx="309" cy="183" r="15.5" fill="url(#gateGrad)" stroke="var(--paper)" stroke-width="2" filter="url(#gateGlow)"/>
+        </g>
+        <g class="gate-pop" style="animation-delay:1.19s">
+          <circle class="ring" cx="459" cy="664" r="15.5" fill="none" stroke="var(--gate-l)" stroke-width="2" style="animation-delay:.9s"/>
+          <circle class="ring" cx="459" cy="664" r="15.5" fill="none" stroke="var(--gate-l)" stroke-width="2" style="animation-delay:2.2s"/>
+          <circle class="gate-circle zone" tabindex="0" role="button" data-title="Gate" data-desc="Venue access point." data-color="var(--gate)"
+                  cx="459" cy="664" r="15.5" fill="url(#gateGrad)" stroke="var(--paper)" stroke-width="2" filter="url(#gateGlow)"/>
+        </g>
+      </g>
+      </svg>
+    </svg>
+  </div>
+
+  <div class="zoom-controls">
+    <button id="zoomIn" title="Zoom in" aria-label="Zoom in">+</button>
+    <button id="zoomOut" title="Zoom out" aria-label="Zoom out">−</button>
+    <button id="zoomReset" class="reset-btn" title="Reset view" aria-label="Reset">RESET</button>
+  </div>
+</div>
+
+<div class="legend" aria-label="Map legend">
+  <div class="legend-item"><span class="legend-swatch game"></span> Game Zone</div>
+  <div class="legend-item"><span class="legend-swatch art"></span> Art &amp; Craft</div>
+  <div class="legend-item"><span class="legend-swatch others"></span> Others</div>
+  <div class="legend-item"><span class="legend-swatch stall"></span> Stall 22–26 / Food Stall</div>
+  <div class="legend-item"><span class="legend-swatch stage"></span> Stage</div>
+  <div class="legend-item"><span class="legend-swatch gate"></span> Gate</div>
+  <div class="legend-item"><span class="legend-swatch road"></span> Road</div>
+  <div class="legend-item"><span class="legend-swatch baal"></span> Baal Vatika</div>
+  <div class="legend-item"><span class="legend-swatch block"></span> A-Block / B-Block</div>
+  <div class="legend-item"><span class="legend-swatch ground"></span> School's Ground</div>
+  <div class="legend-item"><span class="legend-swatch stall"></span> Basketball Court</div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
+  <div class="modal" id="modalCard">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+    <h3 id="modalTitle">Title</h3>
+    <p id="modalDesc">Description</p>
+  </div>
+</div>
+
+<div class="tooltip" id="tooltip">GATE</div>
+
+<script>
+(function () {
+  const svg = document.getElementById('hallMap');
+  const viewport = document.getElementById('mapViewport');
+  const tooltip = document.getElementById('tooltip');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalCard = document.getElementById('modalCard');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalClose = document.getElementById('modalClose');
+
+  let scale = 1, tx = 0, ty = 0;
+  const MIN = 0.55, MAX = 3.8, STEP = 0.22;
+
+  function apply() {
+    svg.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+  }
+
+  function zoom(factor, cx, cy) {
+    const prev = scale;
+    scale = Math.min(MAX, Math.max(MIN, scale * factor));
+    if (cx != null && cy != null) {
+      const r = viewport.getBoundingClientRect();
+      const mx = cx - r.left, my = cy - r.top;
+      tx = mx - (mx - tx) * (scale / prev);
+      ty = my - (my - ty) * (scale / prev);
+    }
+    apply();
+  }
+
+  function reset() { scale = 1; tx = 0; ty = 0; apply(); }
+
+  document.getElementById('zoomIn').onclick = () => zoom(1 + STEP);
+  document.getElementById('zoomOut').onclick = () => zoom(1 / (1 + STEP));
+  document.getElementById('zoomReset').onclick = reset;
+
+  viewport.addEventListener('wheel', e => {
+    e.preventDefault();
+    zoom(e.deltaY < 0 ? 1.1 : 1 / 1.1, e.clientX, e.clientY);
+  }, { passive: false });
+
+  let panning = false, sx, sy, stx, sty;
+  viewport.addEventListener('mousedown', e => {
+    if (e.button !== 0) return;
+    panning = true;
+    sx = e.clientX; sy = e.clientY; stx = tx; sty = ty;
+    viewport.style.cursor = 'grabbing';
+  });
+  window.addEventListener('mousemove', e => {
+    if (!panning) return;
+    tx = stx + (e.clientX - sx);
+    ty = sty + (e.clientY - sy);
+    apply();
+  });
+  window.addEventListener('mouseup', () => { panning = false; viewport.style.cursor = 'grab'; });
+
+  let tStart = null;
+  viewport.addEventListener('touchstart', e => {
+    if (e.touches.length === 1) tStart = { x: e.touches[0].clientX, y: e.touches[0].clientY, tx, ty };
+  }, { passive: true });
+  viewport.addEventListener('touchmove', e => {
+    if (!tStart || e.touches.length !== 1) return;
+    tx = tStart.tx + (e.touches[0].clientX - tStart.x);
+    ty = tStart.ty + (e.touches[0].clientY - tStart.y);
+    apply();
+  }, { passive: true });
+  viewport.addEventListener('touchend', () => { tStart = null; });
+
+  function openModal(title, desc, color) {
+    modalTitle.textContent = title;
+    modalDesc.textContent = desc;
+    modalCard.style.setProperty('--accent', color || 'var(--gate)');
+    modalOverlay.classList.add('open');
+  }
+  function closeModal() { modalOverlay.classList.remove('open'); }
+
+  document.querySelectorAll('.zone').forEach(el => {
+    el.addEventListener('click', e => {
+      e.stopPropagation();
+      openModal(el.dataset.title || 'Zone', el.dataset.desc || '', el.dataset.color);
+    });
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(el.dataset.title || 'Zone', el.dataset.desc || '', el.dataset.color);
+      }
+    });
+  });
+
+  modalClose.onclick = closeModal;
+  modalOverlay.onclick = e => { if (e.target === modalOverlay) closeModal(); };
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  document.querySelectorAll('.gate-circle').forEach(g => {
+    g.addEventListener('mouseenter', () => {
+      const r = g.getBoundingClientRect();
+      tooltip.textContent = 'GATE';
+      tooltip.style.left = (r.left + r.width / 2 - 22) + 'px';
+      tooltip.style.top = (r.top - 28) + 'px';
+      tooltip.classList.add('show');
+    });
+    g.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+  });
+
+  svg.addEventListener('dragstart', e => e.preventDefault());
+})();
+</script>
+</body>
+</html>
